@@ -1,13 +1,110 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: Courier New;
+  border: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
 }
 
-body {
+:is(stator, rotor) {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+rotor {
+  margin: .2vmin .2vmin;
+  background-color: hsl(33, 6%, 25%);
+}
+
+.collapsed {
+  flex-grow: 0;
+}
+
+.collapsed .CodeMirror-scroll {
+  position: absolute;
+  overflow: hidden !important;
+}
+
+.expand-collapse-btn {
+  background: none;
+  color: yellow;
+  cursor: pointer;
+}
+
+fieldset {
+  flex-grow: 1;
+  border: .25vmin solid green;
+  border-radius: .25vmin;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
+}
+
+legend {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  line-height: 100%;
+  padding: 0 .5vmin 0 0;
+  border-radius: 50vh;
+  border: .2vmin solid orange;
+}
+
+legend > button {
+  padding: 0 .5vmin;
+  margin: 0 .5vmin;
+  border: none;
+  border-right: .2vmin solid orange;
+}
+
+.CodeMirror {
+  height: 100% !important;
+}
+
+.code-mirror-wrapper, iframe {
+  flex-grow: 1;
+  font-size: 5vmin;
+  cursor: 5vmin;
+  overflow: hidden;
+  border: 0.1vmin solid orange;
+  border-radius: 2.5vmin;
+  touch-action: none;
+}
+
+iframe {
+  border: none;
+}
+
+@media (orientation: portrait) {
+  stator {
+    flex-direction: column;
+  }
+  rotor {
+    height: 100vh;
+  }
+  :is(.code-mirror-wrapper, .code-mirror-wrapper :focus) {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
+
+@media (orientation: landscape) {
+  stator {
+    flex-direction: row;
+  }
+  rotor {
+    width: 50vw;
+  }
+  :is(.code-mirror-wrapper, .code-mirror-wrapper :focus) {
+    width: 49vw;
+    max-width: 49vw;
+  }
 }
