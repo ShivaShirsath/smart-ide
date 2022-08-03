@@ -69,7 +69,8 @@ legend > button {
   height: 100% !important;
 }
 
-.code-mirror-wrapper, iframe {
+.code-mirror-wrapper,
+iframe {
   flex-grow: 1;
   font-size: 5vmin;
   cursor: 5vmin;
@@ -87,9 +88,11 @@ iframe {
   stator {
     flex-direction: column;
   }
+
   rotor {
     height: 100vh;
   }
+
   :is(.code-mirror-wrapper, .code-mirror-wrapper :focus) {
     width: 100vw;
     max-width: 100vw;
@@ -100,9 +103,11 @@ iframe {
   stator {
     flex-direction: row;
   }
+
   rotor {
     width: 50vw;
   }
+
   :is(.code-mirror-wrapper, .code-mirror-wrapper :focus) {
     width: 49vw;
     max-width: 49vw;
