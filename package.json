@@ -1,7 +1,7 @@
 {
   "homepage": "https://ShivaShirsath.github.io/ide",
   "name": "ide",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "codemirror": "^5.65.7",
