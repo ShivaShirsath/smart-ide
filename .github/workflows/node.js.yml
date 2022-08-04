@@ -22,5 +22,5 @@ jobs:
         with:
           branch: gh-pages
           folder: build
-          clean: false
+          clean: true
           single-commit: true
