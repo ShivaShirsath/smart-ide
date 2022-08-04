@@ -28,7 +28,7 @@ export default function Editor(props) {
       <IDE
         onBeforeChange={handleChange}
         value={value}
-        className="code-mirror-wrapper"
+        className="editor"
         options={{
           lineWrapping: true,
           lint: true,

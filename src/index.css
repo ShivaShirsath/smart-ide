@@ -8,6 +8,7 @@
   outline: none;
   resize: none;
   box-sizing: border-box;
+  font-size: 3.6vmin;
 }
 
 :is(stator, rotor) {
@@ -21,6 +22,7 @@
 }
 
 rotor {
+  flex-grow: 0;
   margin: .2vmin .2vmin;
   background-color: hsl(33, 6%, 25%);
 }
@@ -41,11 +43,12 @@ rotor {
 }
 
 fieldset {
-  flex-grow: 1;
   border: .25vmin solid green;
   border-radius: .25vmin;
   display: flex;
+  max-height: 50vh;
   flex-direction: column;
+  overflow: hidden;
 }
 
 legend {
@@ -69,11 +72,9 @@ legend > button {
   height: 100% !important;
 }
 
-.code-mirror-wrapper,
+.editor,
 iframe {
   flex-grow: 1;
-  font-size: 5vmin;
-  cursor: 5vmin;
   overflow: hidden;
   border: 0.1vmin solid orange;
   border-radius: 2.5vmin;
@@ -90,12 +91,13 @@ iframe {
   }
 
   rotor {
-    height: 100vh;
+    min-height: 50vh;
+    height: 50vh;
+    max-height: 50vh;
   }
 
-  :is(.code-mirror-wrapper, .code-mirror-wrapper :focus) {
+  :is(.editor, .editor:focus) {
     width: 100vw;
-    max-width: 100vw;
   }
 }
 
@@ -105,11 +107,10 @@ iframe {
   }
 
   rotor {
-    width: 50vw;
+    max-width: 50vw;
   }
 
-  :is(.code-mirror-wrapper, .code-mirror-wrapper :focus) {
-    width: 49vw;
-    max-width: 49vw;
+  :is(.editor, .editor :focus) {
+    width: 49vh;
   }
 }
