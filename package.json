@@ -1,6 +1,6 @@
 {
-  "homepage": "https://ShivaShirsath.github.io/ide",
-  "name": "web-ide",
+  "homepage": "https://ShivaShirsath.github.io/",
+  "name": "ide",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
