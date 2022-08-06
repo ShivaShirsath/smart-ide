@@ -1,9 +1,11 @@
 name: Build and Deploy
-on: [/*push*/]
+on: [push]
 permissions:
   contents: write
 jobs:
   build-and-deploy:
+    name: Deploy on gh-pages if mention
+    if: startsWith(github.event.commits[0].message, 'gh-pages')
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     steps:
