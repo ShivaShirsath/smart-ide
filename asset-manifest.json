@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/smart-ide/static/css/main.72081404.css",
+    "main.css": "/smart-ide/static/css/main.7ca38e1e.css",
     "main.js": "/smart-ide/static/js/main.15df0fd5.js",
     "index.html": "/smart-ide/index.html",
-    "main.72081404.css.map": "/smart-ide/static/css/main.72081404.css.map",
+    "main.7ca38e1e.css.map": "/smart-ide/static/css/main.7ca38e1e.css.map",
     "main.15df0fd5.js.map": "/smart-ide/static/js/main.15df0fd5.js.map"
   },
   "entrypoints": [
-    "static/css/main.72081404.css",
+    "static/css/main.7ca38e1e.css",
     "static/js/main.15df0fd5.js"
   ]
 }
