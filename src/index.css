@@ -9,6 +9,7 @@
   resize: none;
   box-sizing: border-box;
   font-size: 3.6vmin;
+border: 1vmin solid red;
 }
 
 :is(stator, rotor) {
