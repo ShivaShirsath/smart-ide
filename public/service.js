@@ -1,14 +1,35 @@
 const cacheName = "chacheide";
-const staticAssets = [
+const filesToCache = [
   ".",
   "%PUBLIC_URL%/index.html",
-  "%PUBLIC_URL%/static/css/",
-  "%PUBLIC_URL%/static/js/",
 ];
 
+//^^^^^^^^| helper functions |^^^^^^^^//
+function filesAreCached(){
+
+    Promise.all([
+        getFileArray( "%PUBLIC_URL%" ),
+        getFileArray( "%PUBLIC_URL%/static/css" ),
+        getFileArray( "%PUBLIC_URL%/static/js" )
+    ])
+    .then( promiseArray => {
+        let promisedFiles = [];
+        promiseArray.forEach( array => {
+            promisedFiles = promisedFiles.concat( array ) ;
+        } );
+        return promisedFiles;
+    })
+    .then( promisedFiles => {
+        filesToCache = filesToCache.concat( promisedFiles );
+        console.log( "Cached files:", filesToCache  );
+        return self.caches.open( cacheName );
+    })
+    .then( cache => cache.addAll( filesToCache ) );
+}
+//^^^^^^^^| helper functions |^^^^^^^^//
+
 self.addEventListener("install", async (e) => {
-  const cache = await caches.open(cacheName);
-  await cache.addAll(staticAssets);
+  e.waitUntil( filesAreCached() );
   return self.skipWaiting();
 });
 
