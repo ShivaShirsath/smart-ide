@@ -1,6 +1,6 @@
 {
   "homepage": "https://smart-ide.web.app",
-  "name": "ide",
+  "name": "smart-ide",
   "version": "0.1.1",
   "private": true,
   "dependencies": {
