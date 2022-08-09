@@ -1,6 +1,6 @@
 {
   "homepage": "https://smart-ide.web.app",
-  "name": "smart-ide",
+  "name": "ide",
   "version": "0.1.1",
   "private": true,
   "dependencies": {
@@ -9,19 +9,7 @@
     "react": "^18.2.0",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "workbox-background-sync": "^5.1.3",
-    "workbox-broadcast-update": "^5.1.3",
-    "workbox-cacheable-response": "^5.1.3",
-    "workbox-core": "^5.1.3",
-    "workbox-expiration": "^5.1.3",
-    "workbox-google-analytics": "^5.1.3",
-    "workbox-navigation-preload": "^5.1.3",
-    "workbox-precaching": "^5.1.3",
-    "workbox-range-requests": "^5.1.3",
-    "workbox-routing": "^5.1.3",
-    "workbox-strategies": "^5.1.3",
-    "workbox-streams": "^5.1.3"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -32,7 +20,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app"]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
     "production": [">0.2%", "not dead", "not op_mini all"],
