@@ -5,8 +5,8 @@ import { registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
-const self = window.this;
-precacheAndRoute(window.self.__WB_MANIFEST);
+
+precacheAndRoute(window.this.__WB_MANIFEST);
 
 const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
 registerRoute(({ request, url }) => {
@@ -27,15 +27,15 @@ registerRoute(({ request, url }) => {
 
 registerRoute(
   ({ url }) =>
-    url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+    url.origin === this.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
     cacheName: "images",
     plugins: [new ExpirationPlugin({ maxEntries: 50 })],
   })
 );
 
-self.addEventListener("message", (event) => {
+this.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
+    this.skipWaiting();
   }
 });
