@@ -5,8 +5,8 @@ import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 
 clientsClaim();
-
-precacheAndRoute(self.__WB_MANIFEST);
+const self = window.this;
+precacheAndRoute(window.self.__WB_MANIFEST);
 
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
