@@ -22,6 +22,7 @@
 }
 
 rotor {
+  position: relative;
   flex-grow: 0;
   margin: .2vmin .2vmin;
   background-color: hsl(33, 6%, 25%);
@@ -113,4 +114,11 @@ iframe {
   :is(.editor, .editor :focus) {
     width: 49vh;
   }
+}
+
+logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .5vmin;
 }
