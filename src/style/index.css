@@ -9,20 +9,60 @@
   resize: none;
   box-sizing: border-box;
   font-size: 3.6vmin;
+  transform-style: preserve-3d;
+  transform: perspective(calc(100vmax *7.5));
+  transition: transform 1s linear;
 }
 
+body {
+  
+}
+
+form {
+  position: relative;
+}
+
+#google {
+  position: absolute;
+  width: 75vmin;
+  aspect-ratio: 1;
+  border: none;
+  background: white;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20210618182605%21Google_%22G%22_Logo.svg");
+  background-color: rgb(0 0 0 0);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: grayscale(0%);
+}
+
+#google:hover{
+  transform: translateZ(25vmin) rotateX(1turn) perspective(100vmax);
+  filter: brightness(100%);
+  filter: grayscale(25%);
+}
+
+#google:active {
+  filter: grayscale(10%);
+  transform: translateZ(-25vmin) perspective(100vmax);
+}
+
+#google:focus {
+  outline: none;
+  filter: grayscale(10%);
+}
+
+#google:disabled {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+}
+/*
 :is(stator, rotor) {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
-  max-width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
 }
 
 rotor {
-  position: relative;
   flex-grow: 0;
   margin: .2vmin .2vmin;
   background-color: hsl(33, 6%, 25%);
@@ -42,7 +82,6 @@ rotor {
   color: yellow;
   cursor: pointer;
 }
-
 fieldset {
   border: .25vmin solid green;
   border-radius: .25vmin;
@@ -51,24 +90,6 @@ fieldset {
   flex-direction: column;
   overflow: hidden;
 }
-
-legend {
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  line-height: 100%;
-  padding: 0 .5vmin 0 0;
-  border-radius: 50vh;
-  border: .2vmin solid orange;
-}
-
-legend > button {
-  padding: 0 .5vmin;
-  margin: 0 .5vmin;
-  border: none;
-  border-right: .2vmin solid orange;
-}
-
 .CodeMirror {
   height: 100% !important;
 }
@@ -115,7 +136,7 @@ iframe {
     width: 49vh;
   }
 }
-
+*/
 logout {
   position: absolute;
   top: 0;

@@ -27,8 +27,7 @@ export default function Login() {
     <form onSubmit={ handleSubmit }>
       <h2 align="center">Log In</h2>
       {error && <span>{error}</span>}
-      <button disabled={loading} type="submit" >
-        Login
+      <button id="google" disabled={loading} type="submit" >
       </button>
     </form>
   )
