@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "./firebase/AuthContext"
-import { useHistory } from "react-router-dom"
-import Editor from "./activities/Editor";
-import useLocalStorage from "./hooks/useLocalStorage";
+import { useAuth } from "../firebase/AuthContext"
+import Editor from "./Editor";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function Dashboard() {
   const [html, setHtml] = useLocalStorage("html", "");
@@ -11,7 +10,6 @@ function Dashboard() {
   const [srcDoc, setSrcDoc] = useState("");
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
-  const history = useHistory()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -32,7 +30,6 @@ function Dashboard() {
 
     try {
       await logout()
-      history.push("/login")
     } catch {
       setError("Failed to log out")
     }
@@ -44,7 +41,7 @@ function Dashboard() {
       <iframe
         srcDoc={srcDoc}
         title="output"
-        sandbox="allow-scripts"
+        /* sandbox="allow-scripts" */
         frameBorder="0"
         width="100%"
         height="100%"

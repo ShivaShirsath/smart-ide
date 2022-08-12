@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const PREFIX = "ide-";
+const PREFIX = "smart-ide--";
 
 export default function useLocalStorage(key, initialValue) {
   const prefixedKey = PREFIX + key;
