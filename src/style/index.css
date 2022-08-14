@@ -1,4 +1,4 @@
- * {
+* {
   margin: 0;
   padding: 0;
   font-family: Courier New;
@@ -11,62 +11,33 @@
   font-size: 3.6vmin;
 }
 
-:is(stator, rotor) {
+body, #root, form {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  align-items: center;
+}
+
+:is(stator, rotor, form) {
+  display: flex;
   flex-direction: column;
-  width: 100vw;
-  max-width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+:is(stator, rotor, form) > * {
+  flex-grow: 1;
+  width: 100%;
 }
 
 rotor {
   position: relative;
-  flex-grow: 0;
-  margin: .2vmin .2vmin;
-  background-color: hsl(33, 6%, 25%);
-}
-
-.collapsed {
-  flex-grow: 0;
-}
-
-.collapsed .CodeMirror-scroll {
-  position: absolute;
-  overflow: hidden !important;
-}
-
-.expand-collapse-btn {
-  background: none;
-  color: yellow;
-  cursor: pointer;
-}
-
-fieldset {
-  border: .25vmin solid green;
-  border-radius: .25vmin;
-  display: flex;
-  max-height: 50vh;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-legend {
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  line-height: 100%;
-  padding: 0 .5vmin 0 0;
-  border-radius: 50vh;
-  border: .2vmin solid orange;
-}
-
-legend > button {
-  padding: 0 .5vmin;
-  margin: 0 .5vmin;
-  border: none;
-  border-right: .2vmin solid orange;
+  width: 100%;
+  height: 100%;
+  margin: .5vmin;
 }
 
 .CodeMirror {
@@ -75,15 +46,17 @@ legend > button {
 
 .editor,
 iframe {
-  flex-grow: 1;
   overflow: hidden;
   border: 0.1vmin solid orange;
   border-radius: 2.5vmin;
   touch-action: none;
+  width: 100%;
+  max-width: 100%;
 }
 
 iframe {
-  border: none;
+  margin: .5vmin;
+  border-radius: .5vmin;
 }
 
 @media (orientation: portrait) {
@@ -91,14 +64,8 @@ iframe {
     flex-direction: column;
   }
 
-  rotor {
-    min-height: 50vh;
-    height: 50vh;
-    max-height: 50vh;
-  }
-
   :is(.editor, .editor:focus) {
-    width: 100vw;
+    
   }
 }
 
@@ -107,12 +74,8 @@ iframe {
     flex-direction: row;
   }
 
-  rotor {
-    max-width: 50vw;
-  }
-
   :is(.editor, .editor :focus) {
-    width: 49vh;
+    
   }
 }
 
@@ -124,22 +87,20 @@ logout {
 }
 
 #gbtn {
-  width: 20vmin;
-  height: 20vmin;
-  transition: background-color .3s, box-shadow .3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
   border: none;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
   color: #757575;
   font-weight: 500;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20210618182605%21Google_%22G%22_Logo.svg);
   background-color: white;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: 50%;
 }
 
 #gbtn:hover {
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 #gbtn:active {
@@ -148,15 +109,13 @@ logout {
 
 #gbtn:focus {
   outline: none;
-  box-shadow:
-    0 -1px 0 rgba(0, 0, 0, .04),
-    0 2px 4px rgba(0, 0, 0, .25),
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
     0 0 0 3px #c8dafc;
 }
 
 #gbtn:disabled {
   filter: grayscale(100%);
   background-color: #ebebeb;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
   cursor: not-allowed;
 }

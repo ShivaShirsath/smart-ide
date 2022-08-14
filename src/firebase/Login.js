@@ -24,12 +24,10 @@ export default function Login() {
   }
 
   return (
-    <rotor>
-      <form onSubmit={handleSubmit}>
-        <h2 align="center">Log In</h2>
-        {error && <span>{error}</span>}
-        <button id="gbtn" disabled={loading} type="submit" />
-      </form>
-    </rotor>
+    <form onSubmit={handleSubmit}>
+      <h1 align="center">Log In</h1>
+      {error && <span>{error}</span>}
+      <button id="gbtn" disabled={loading} type="submit" />
+    </form>
   );
 }

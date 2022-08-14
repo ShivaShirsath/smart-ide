@@ -49,7 +49,7 @@ function Dashboard() {
       <rotor>
         {currentUser.displayName}
         <Editor
-          language="xml"
+          language="htmlmixed"
           displayName="HTML"
           value={html}
           onChange={setHtml}

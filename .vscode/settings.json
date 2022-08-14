@@ -26,5 +26,6 @@
     "workbench.preferredHighContrastColorTheme": "Darcula",
     "workbench.preferredHighContrastLightColorTheme": "Darcula",
     "workbench.preferredLightColorTheme": "Darcula",
-    "material-icon-theme.activeIconPack": "react"
+    "material-icon-theme.activeIconPack": "react",
+    "liveServer.settings.port": 5502
 }
