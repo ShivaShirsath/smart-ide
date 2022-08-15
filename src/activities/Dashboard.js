@@ -11,12 +11,14 @@ function Dashboard() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
 
-  useEffect(() => {
+    useEffect(() => {
     const timeout = setTimeout(() => {
       setSrcDoc(`
         <html>
+        <head>
+          <style>${css}</style>
+        </head>
         <body>${html}</body>
-        <style>${css}</style>
         <script>${js}</script>
         </html>
         `);
