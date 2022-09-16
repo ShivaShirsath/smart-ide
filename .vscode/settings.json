@@ -44,5 +44,7 @@
   "codeswing.autoSave": true,
   "debug.javascript.codelens.npmScripts": "top",
   "npm.packageManager": "npm",
-  "editor.renderWhitespace": "all"
+  "editor.renderWhitespace": "all",
+  "editor.stickyScroll.enabled": true,
+  "editor.stickyScroll.maxLineCount": 10
 }
