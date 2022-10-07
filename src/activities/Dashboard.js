@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../firebase/AuthContext"
+import { useAuth } from "../firebase/AuthContext";
 import Editor from "./Editor";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -8,15 +8,17 @@ function Dashboard() {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
 
-  useEffect(() => {
+    useEffect(() => {
     const timeout = setTimeout(() => {
       setSrcDoc(`
         <html>
+        <head>
+          <style>${css}</style>
+        </head>
         <body>${html}</body>
-        <style>${css}</style>
         <script>${js}</script>
         </html>
         `);
@@ -26,18 +28,18 @@ function Dashboard() {
   }, [html, css, js]);
 
   async function handleLogout() {
-    setError("")
+    setError("");
 
     try {
-      await logout()
+      await logout();
     } catch {
-      setError("Failed to log out")
+      setError("Failed to log out");
     }
   }
-  
+
   return (
     <stator>
-    {error && <span>{error}</span>}
+      {error && <span>{error}</span>}
       <iframe
         srcDoc={srcDoc}
         title="output"
@@ -47,9 +49,9 @@ function Dashboard() {
         height="100%"
       />
       <rotor>
-      { currentUser.displayName }
+        {currentUser.displayName}
         <Editor
-          language="xml"
+          language="htmlmixed"
           displayName="HTML"
           value={html}
           onChange={setHtml}
@@ -66,9 +68,7 @@ function Dashboard() {
           value={js}
           onChange={setJs}
         />
-      <logout onClick={handleLogout}>
-        ⎋
-      </logout>
+        <logout onClick={handleLogout}>⎋</logout>
       </rotor>
     </stator>
   );

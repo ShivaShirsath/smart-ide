@@ -1,34 +1,35 @@
-import React, { useState } from "react"
-import { useAuth } from "./AuthContext"
-import { useHistory } from "react-router-dom"
+import React, { useState } from "react";
+import { useAuth } from "./AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
-  const { login } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      setError("")
-      setLoading(true)
-      await login()
-      history.push("/")
+      setError("");
+      setLoading(true);
+      await login();
+      history.push("/");
     } catch {
-      setError("Failed to log in")
+      setError("Failed to log in");
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <h2 align="center">Log In</h2>
-      {error && <span>{error}</span>}
-      <button id="google" disabled={loading} type="submit" >
-      </button>
-    </form>
-  )
+    <stator>
+      <form onSubmit={handleSubmit}>
+        <h1 align="center">Log In</h1>
+        {error && <span>{error}</span>}
+        <button id="gbtn" disabled={loading} type="submit" />
+      </form>
+    </stator>
+  );
 }
