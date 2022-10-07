@@ -1,4 +1,4 @@
-* {
+ * {
   margin: 0;
   padding: 0;
   font-family: Courier New;
@@ -11,39 +11,62 @@
   font-size: 3.6vmin;
 }
 
-body, #root, form {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+:is(stator, rotor) {
   display: flex;
-}
-
-:is(stator, rotor, form) {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  flex-direction: column;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
 }
 
-:is(stator, rotor) > *, :is(stator, rotor) > * > * {
-  flex-grow: 1;
-  line-height: 100%;
-  width: 100%;
-  height: 100%;
-}
-
-h1 {
-  line-height: 25vmin;
-  height: 25vmin;
-}
 rotor {
   position: relative;
-  width: 100%;
-  height: 100%;
-  margin: .5vmin;
+  flex-grow: 0;
+  margin: .2vmin .2vmin;
+  background-color: hsl(33, 6%, 25%);
+}
+
+.collapsed {
+  flex-grow: 0;
+}
+
+.collapsed .CodeMirror-scroll {
+  position: absolute;
+  overflow: hidden !important;
+}
+
+.expand-collapse-btn {
+  background: none;
+  color: yellow;
+  cursor: pointer;
+}
+
+fieldset {
+  border: .25vmin solid green;
+  border-radius: .25vmin;
+  display: flex;
+  max-height: 50vh;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+legend {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  line-height: 100%;
+  padding: 0 .5vmin 0 0;
+  border-radius: 50vh;
+  border: .2vmin solid orange;
+}
+
+legend > button {
+  padding: 0 .5vmin;
+  margin: 0 .5vmin;
+  border: none;
+  border-right: .2vmin solid orange;
 }
 
 .CodeMirror {
@@ -52,36 +75,44 @@ rotor {
 
 .editor,
 iframe {
+  flex-grow: 1;
   overflow: hidden;
   border: 0.1vmin solid orange;
   border-radius: 2.5vmin;
   touch-action: none;
-  width: 100%;
-  max-width: 100%;
 }
 
 iframe {
-  margin: .5vmin;
-  border-radius: .5vmin;
+  border: none;
 }
 
 @media (orientation: portrait) {
-  stator, form {
+  stator {
     flex-direction: column;
   }
 
+  rotor {
+    min-height: 50vh;
+    height: 50vh;
+    max-height: 50vh;
+  }
+
   :is(.editor, .editor:focus) {
-    
+    width: 100vw;
   }
 }
 
 @media (orientation: landscape) {
-  stator, form {
+  stator {
     flex-direction: row;
   }
 
+  rotor {
+    max-width: 50vw;
+  }
+
   :is(.editor, .editor :focus) {
-    
+    width: 49vh;
   }
 }
 
@@ -92,36 +123,36 @@ logout {
   padding: .5vmin;
 }
 
-#gbtn {
-  transition: background-color 0.3s, box-shadow 0.3s;
+#google {
+  position: absolute;
+  width: 75vmin;
+  aspect-ratio: 1;
   border: none;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
-  color: #757575;
-  font-weight: 500;
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20210618182605%21Google_%22G%22_Logo.svg);
-  background-color: white;
+  background: white;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20210618182605%21Google_%22G%22_Logo.svg");
+  background-color: rgb(0 0 0 0);
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 50%;
+  background-size: cover;
+  filter: grayscale(0%);
 }
 
-#gbtn:hover {
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+#google:hover{
+  transform: translateZ(25vmin) rotateX(1turn) perspective(100vmax);
+  filter: brightness(100%);
+  filter: grayscale(25%);
 }
 
-#gbtn:active {
-  background-color: #eeeeee;
+#google:active {
+  filter: grayscale(10%);
+  transform: translateZ(-25vmin) perspective(100vmax);
 }
 
-#gbtn:focus {
+#google:focus {
   outline: none;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
-    0 0 0 3px #c8dafc;
+  filter: grayscale(10%);
 }
 
-#gbtn:disabled {
+#google:disabled {
   filter: grayscale(100%);
-  background-color: #ebebeb;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
   cursor: not-allowed;
 }
