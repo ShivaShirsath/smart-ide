@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/darcula.css";
@@ -33,8 +33,7 @@ import "codemirror/addon/fold/xml-fold";
 import { Controlled as IDE } from "react-codemirror2";
 
 export default function Editor(props) {
-  const { language, displayName, value, onChange } = props;
-  const [open, setOpen] = useState(true);
+  const { language, value, onChange } = props;
 
   return (
     <IDE
