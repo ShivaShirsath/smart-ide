@@ -10,8 +10,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    try {
+  try {
       setError("");
       setLoading(true);
       await login();
@@ -25,11 +24,14 @@ export default function Login() {
 
   return (
     <stator>
-      <form onSubmit={handleSubmit}>
-        <h1 align="center">Log In</h1>
-        {error && <span>{error}</span>}
-        <button id="gbtn" disabled={loading} type="submit" />
-      </form>
-    </stator>
+      <h1 align="center">Log In</h1>
+      {error && <span>{error}</span>}
+      <img
+        id="gbtn"
+        alt="Google"
+        src="https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20210618182605%21Google_%22G%22_Logo.svg"
+        disabled={loading}
+        onClick={handleSubmit}/>
+      </stator>
   );
 }
