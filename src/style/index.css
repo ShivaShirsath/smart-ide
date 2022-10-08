@@ -36,7 +36,10 @@ rotor {
   height: 100%;
   margin: .5vmin;
 }
-
+user {
+  display: inline-flex;
+  width: 100%;
+}
 .CodeMirror {
   height: 100% !important;
 }

@@ -30,8 +30,8 @@ export default function Login() {
         id="gbtn"
         alt="Google"
         src="https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20210618182605%21Google_%22G%22_Logo.svg"
-        disabled={loading}
-        onClick={handleSubmit}/>
+        disabled={ loading }
+        onClick={ handleSubmit }/>
       </stator>
   );
 }

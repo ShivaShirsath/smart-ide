@@ -49,7 +49,10 @@ function Dashboard() {
         height="100%"
       />
       <rotor>
-        {currentUser.displayName}
+        <>
+          {currentUser.displayName}
+          <logout onClick={handleLogout}>⎋</logout>
+        </>
         <Editor
           language="htmlmixed"
           displayName="HTML"
@@ -68,7 +71,6 @@ function Dashboard() {
           value={js}
           onChange={setJs}
         />
-        <logout onClick={handleLogout}>⎋</logout>
       </rotor>
     </stator>
   );
