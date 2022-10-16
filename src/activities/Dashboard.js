@@ -22,7 +22,7 @@ function Dashboard() {
         <script>${js}</script>
         </html>
         `);
-    }, 250);
+    }, 350);
 
     return () => clearTimeout(timeout);
   }, [html, css, js]);

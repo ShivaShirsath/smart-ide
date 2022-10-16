@@ -21,7 +21,7 @@
   "css.lint.float": "warning",
   "less.lint.float": "warning",
   "scss.lint.float": "warning",
-  "workbench.colorTheme": "PyCharm Dark+ Theme",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.preferredDarkColorTheme": "PyCharm Dark+ Theme",
   "workbench.preferredHighContrastColorTheme": "PyCharm Night Theme",
   "workbench.preferredHighContrastLightColorTheme": "Pycharm Original Theme",
@@ -44,5 +44,8 @@
   "codeswing.autoSave": true,
   "debug.javascript.codelens.npmScripts": "top",
   "npm.packageManager": "npm",
-  "editor.renderWhitespace": "all"
+  "editor.renderWhitespace": "all",
+  "editor.stickyTabStops": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.stickyScroll.maxLineCount": 10
 }
