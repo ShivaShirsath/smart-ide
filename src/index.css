@@ -5,13 +5,13 @@
 }
 
 body {
-    margin: .5%;
-    padding: .5%;
-    font-family: 'Courier New';
-    background: hsla(0, 0%, 0%, 0);
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  margin: .5%;
+  padding: .5%;
+  font-family: 'Courier New';
+  background: hsla(0, 0%, 0%, 0);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

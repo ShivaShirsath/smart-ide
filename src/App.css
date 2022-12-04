@@ -3,106 +3,108 @@
 }
 
 .homePageWrapper {
-    display: flex;
-    color: hsl(0, 0%, 100%);
+  display: flex;
+  color: hsl(0, 0%, 100%);
 }
 
 .formWrapper {
-    position: fixed;
-    top: 12.5vh;
-    right: 12.5vw;
-    bottom: 12.5vh;
-    left: 12.5vw;
-    background: hsla(30, 100%, 36%, 0.226);
-    padding: 2.5vmin;
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  top: 12.5vh;
+  right: 12.5vw;
+  bottom: 12.5vh;
+  left: 12.5vw;
+  background: hsla(30, 100%, 36%, 0.226);
+  padding: 2.5vmin;
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    text-align: center;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
 }
 
 footer a {
-    color: hsl(48, 100%, 50%);
+  color: hsl(48, 100%, 50%);
 }
 
-.inputGroup, .inputBtnGroup {
-    display: flex;
-    flex-direction: column;
+.inputGroup,
+.inputBtnGroup {
+  display: flex;
+  flex-direction: column;
 }
 
 .inputBtnGroup {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 input {
-    outline: none;
-    border: none;
-    margin: 1.25%;
-    padding: 2.5%;
-    background: hsla(0, 0%, 100%, 0.75);
-    font-weight: bold;
+  outline: none;
+  border: none;
+  margin: 1.25%;
+  padding: 2.5%;
+  background: hsla(0, 0%, 100%, 0.75);
+  font-weight: bold;
 }
 
 input[type="button"] {
-    cursor: pointer;
-    background: #0000;
-    color: hsl(0, 0%, 100%);
-    border-top: 1vmin solid hsl(30, 100%, 50%);
-    border-bottom: 1vmin solid hsl(120, 100%, 40%);
-    transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  background: #0000;
+  color: hsl(0, 0%, 100%);
+  border-top: 1vmin solid hsl(30, 100%, 50%);
+  border-bottom: 1vmin solid hsl(120, 100%, 40%);
+  transition: all 0.3s ease-in-out;
 }
 
 
 .createNewBtn:hover,
 footer a:hover {
-    color: hsla(30, 43%, 37%, 0.436);
-    border-color: hsla(30, 43%, 37%, 0.55);
+  color: hsla(30, 43%, 37%, 0.436);
+  border-color: hsla(30, 43%, 37%, 0.55);
 }
 
 .mainWrap {
-    display: grid;
-    position: fixed;
-    top: 1%;
-    right: 1%;
-    bottom: 1%;
-    left: 1%;
-    grid-template-columns: 1fr;
+  display: grid;
+  position: fixed;
+  top: 1%;
+  right: 1%;
+  bottom: 1%;
+  left: 1%;
+  grid-template-columns: 1fr;
 }
 
 .aside {
-    background: #1c1e29;
-    padding: 16px;
-    color: hsl(0, 0%, 100%);
-    display: flex;
-    flex-direction: column;
+  background: #1c1e29;
+  padding: 16px;
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  flex-direction: column;
 }
+
 .asideInner {
-    flex: 1;
+  flex: 1;
 }
 
 .clientsList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1vmin;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vmin;
 }
 
 .client {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
 }
 
 
 .CodeMirror {
-    min-height: 74vh;
-    min-width: 100%;
-    line-height: 1.6;
+  min-height: 74vh;
+  min-width: 100%;
+  line-height: 1.6;
 }
 
 iframe {
@@ -110,7 +112,7 @@ iframe {
   width: 100%;
 }
 
-.aside{
+.aside {
   position: fixed;
   right: 1%;
   bottom: 1%;
@@ -120,20 +122,20 @@ iframe {
   height: 10vh;
 }
 
-.aside:hover{
+.aside:hover {
   width: 80%;
   height: 80%;
   display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-content: baseline;
-    overflow: hidden;
-    flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: baseline;
+  overflow: hidden;
+  flex-direction: column;
 }
 
 .aside:hover > div {
   width: 100%;
-    margin: .5%;
+  margin: .5%;
 }
 
 .aside:hover > button {
@@ -148,6 +150,7 @@ iframe {
   background: green;
   color: white;
 }
+
 .aside:hover > #leave:hover {
   background: red;
   color: white;
@@ -156,11 +159,12 @@ iframe {
 .aside:hover > img {
   width: 25vmin;
 }
+
 .inputBox:focus {
   outline: .125vmin solid hsl(39, 100%, 50%);
 }
 
-body:has(.inputBox:invalid, .inputBox:placeholder-shown) #join{
+body:has(.inputBox:invalid, .inputBox:placeholder-shown) #join {
   pointer-events: none;
   color: hsl(0, 0%, 0%);
   opacity: .5;
@@ -185,9 +189,9 @@ body:has(#id:not(:placeholder-shown)) #new {
 .editorWrap {
   display: flex;
   justify-content: space-between;
-    align-items: center;
-    align-content: baseline;
-    overflow: hidden;
-    flex-direction: column;
-  
+  align-items: center;
+  align-content: baseline;
+  overflow: hidden;
+  flex-direction: column;
+
 }
