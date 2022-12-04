@@ -1,0 +1,141 @@
+.homePageWrapper {
+    display: flex;
+    color: hsl(0, 0%, 100%);
+}
+
+.formWrapper {
+    position: fixed;
+    top: 12.5vh;
+    right: 12.5vw;
+    bottom: 12.5vh;
+    left: 12.5vw;
+    background: hsla(30, 100%, 36%, 0.226);
+    padding: 2.5vmin;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+footer a {
+    color: hsl(48, 100%, 50%);
+}
+
+.inputGroup, .inputBtnGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputBtnGroup {
+    flex-direction: row-reverse;
+}
+
+input {
+    outline: none;
+    border: none;
+    margin: 1.25%;
+    padding: 2.5%;
+    background: hsla(0, 0%, 100%, 0.75);
+    font-weight: bold;
+}
+
+input[type="button"] {
+    cursor: pointer;
+    background: #0000;
+    color: hsl(0, 0%, 100%);
+    border-top: 1vmin solid hsl(30, 100%, 50%);
+    border-bottom: 1vmin solid hsl(120, 100%, 40%);
+    transition: all 0.3s ease-in-out;
+}
+
+.joinBtn,
+.leaveBtn {
+    background: hsl(30, 82%, 61%);
+    width: max-content;
+    margin-left: auto;
+}
+
+.joinBtn:hover,
+.leaveBtn:hover {
+    background: hsla(30, 50%, 34%, 0.445);
+}
+
+.createNewBtn:hover,
+footer a:hover {
+    color: hsla(30, 43%, 37%, 0.436);
+    border-color: hsla(30, 43%, 37%, 0.55);
+}
+
+.mainWrap {
+    display: grid;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    bottom: 1%;
+    left: 1%;
+    grid-template-columns: 25vw 1fr;
+}
+
+.aside {
+    background: #1c1e29;
+    padding: 16px;
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+}
+.asideInner {
+    flex: 1;
+}
+
+.clientsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vmin;
+}
+
+.client {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+
+.leaveBtn {
+    width: 100%;
+}
+.CodeMirror {
+    min-height: calc(100%);
+    font-size: 20px;
+    line-height: 1.6;
+    padding-top: 20px;
+}
+
+
+
+
+
+.inputBox:focus {
+  outline: .125vmin solid hsl(39, 100%, 50%);
+}
+
+body:has(.inputBox:invalid, .inputBox:placeholder-shown) #join{
+  pointer-events: none;
+  color: hsl(0, 0%, 0%);
+  opacity: .5;
+}
+
+.inputBtnBox:focus {
+  outline: 1px solid hsl(120, 100%, 25%);
+}
+
+body:has(#id:not(:placeholder-shown)) #new {
+  pointer-events: none;
+  color: hsl(0, 0%, 0%);
+  opacity: .5;
+}
