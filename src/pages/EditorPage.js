@@ -18,7 +18,7 @@ const EditorPage = () => {
     const { roomId } = useParams();
     const reactNavigator = useNavigate();
     const [clients, setClients] = useState([]);
-
+    const [html, setHtml] = useState("");
     useEffect(() => {
         const init = async () => {
             socketRef.current = await initSocket();
@@ -94,14 +94,15 @@ const EditorPage = () => {
     return (
         <div className="mainWrap">
             <div className="aside">
-                <div className="asideInner">
-                    <div className="logo">
+            
                         <img
                             className="logoImage"
                             src="/code-sync.png"
                             alt="logo"
                         />
-                    </div>
+                    
+                <div className="asideInner">
+                    
                     <h3>Connected</h3>
                     <div className="clientsList">
                         {clients.map((client) => (
@@ -112,21 +113,24 @@ const EditorPage = () => {
                         ))}
                     </div>
                 </div>
-                <button className="btn copyBtn" onClick={copyRoomId}>
+                <button id="copy" onClick={copyRoomId}>
                     Copy ROOM ID
                 </button>
-                <button className="btn leaveBtn" onClick={leaveRoom}>
-                    Leave
+                <button id="leave" onClick={leaveRoom}>
+                    Leave ROOM
                 </button>
             </div>
             <div className="editorWrap">
+                <iframe srcDoc={html}/>
                 <Editor
                     socketRef={socketRef}
                     roomId={roomId}
                     onCodeChange={(code) => {
                         codeRef.current = code;
+                        setHtml(codeRef.current);
                     }}
                 />
+                
             </div>
         </div>
     );

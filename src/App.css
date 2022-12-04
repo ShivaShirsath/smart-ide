@@ -1,3 +1,7 @@
+* {
+  transition: .5s linear;
+}
+
 .homePageWrapper {
     display: flex;
     color: hsl(0, 0%, 100%);
@@ -54,17 +58,6 @@ input[type="button"] {
     transition: all 0.3s ease-in-out;
 }
 
-.joinBtn,
-.leaveBtn {
-    background: hsl(30, 82%, 61%);
-    width: max-content;
-    margin-left: auto;
-}
-
-.joinBtn:hover,
-.leaveBtn:hover {
-    background: hsla(30, 50%, 34%, 0.445);
-}
 
 .createNewBtn:hover,
 footer a:hover {
@@ -79,7 +72,7 @@ footer a:hover {
     right: 1%;
     bottom: 1%;
     left: 1%;
-    grid-template-columns: 25vw 1fr;
+    grid-template-columns: 1fr;
 }
 
 .aside {
@@ -106,20 +99,63 @@ footer a:hover {
 }
 
 
-.leaveBtn {
-    width: 100%;
-}
 .CodeMirror {
-    min-height: calc(100%);
-    font-size: 20px;
+    min-height: 74vh;
+    min-width: 100%;
     line-height: 1.6;
-    padding-top: 20px;
 }
 
+iframe {
+  min-height: 24vh;
+  width: 100%;
+}
 
+.aside{
+  position: fixed;
+  right: 1%;
+  bottom: 1%;
+  z-index: 100;
+  overflow: hidden;
+  width: 10vh;
+  height: 10vh;
+}
 
+.aside:hover{
+  width: 80%;
+  height: 80%;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: baseline;
+    overflow: hidden;
+    flex-direction: column;
+}
 
+.aside:hover > div {
+  width: 100%;
+    margin: .5%;
+}
 
+.aside:hover > button {
+  width: 80%;
+  font-size: 125%;
+  font-weight: border;
+  padding: 1%;
+  margin: 1%;
+}
+
+.aside:hover > #copy:hover {
+  background: green;
+  color: white;
+}
+.aside:hover > #leave:hover {
+  background: red;
+  color: white;
+}
+
+.aside:hover > img {
+  width: 25vmin;
+}
 .inputBox:focus {
   outline: .125vmin solid hsl(39, 100%, 50%);
 }
@@ -138,4 +174,20 @@ body:has(#id:not(:placeholder-shown)) #new {
   pointer-events: none;
   color: hsl(0, 0%, 0%);
   opacity: .5;
+}
+
+.logoImage {
+  width: 90%;
+  aspect-ratio: 1;
+  margin: 2.5%;
+}
+
+.editorWrap {
+  display: flex;
+  justify-content: space-between;
+    align-items: center;
+    align-content: baseline;
+    overflow: hidden;
+    flex-direction: column;
+  
 }
