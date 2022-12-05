@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Codemirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/darcula.css";
-import "codemirror/mode/javascript/javascript";
+import "codemirror/mode/htmlmixed/htmlmixed";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/edit/closebrackets";
 import ACTIONS from "../Actions";
@@ -14,7 +14,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
       editorRef.current = Codemirror.fromTextArea(
         document.getElementById("realtimeEditor"),
         {
-          mode: { name: "javascript", json: true },
+          mode: { name: "htmlmixed", json: true },
           theme: "darcula",
           autoCloseTags: true,
           autoCloseBrackets: true,

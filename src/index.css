@@ -1,7 +1,7 @@
 * {
   touch-action: none;
-  border-radius: 2.5vmin;
   box-sizing: border-box;
+  font-family: Courier New;
 }
 
 body {

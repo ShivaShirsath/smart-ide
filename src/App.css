@@ -1,4 +1,5 @@
 * {
+  border-radius: 2.5vmin;
   transition: .5s linear;
 }
 
@@ -69,22 +70,31 @@ footer a:hover {
 .mainWrap {
   display: grid;
   position: fixed;
-  top: 1%;
-  right: 1%;
-  bottom: 1%;
-  left: 1%;
+  top: .5%;
+  right: .5%;
+  bottom: .5%;
+  left: .5%;
   grid-template-columns: 1fr;
 }
 
 .aside {
-  background: #1c1e29;
-  padding: 16px;
-  color: hsl(0, 0%, 100%);
+  border: .5vmin solid gray;
+  padding: 1vmin;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  right: 1%;
+  bottom: 1%;
+  z-index: 100;
+  overflow: hidden;
+  width: 7.5vmax;
+  height: 7.5vmax;
 }
 
 .asideInner {
+  margin: 1vmin;
+  padding: 1vmin;
+  border: .25vmin solid orange;
   flex: 1;
 }
 
@@ -112,16 +122,6 @@ iframe {
   width: 100%;
 }
 
-.aside {
-  position: fixed;
-  right: 1%;
-  bottom: 1%;
-  z-index: 100;
-  overflow: hidden;
-  width: 10vh;
-  height: 10vh;
-}
-
 .aside:hover {
   width: 80%;
   height: 80%;
@@ -131,6 +131,7 @@ iframe {
   align-content: baseline;
   overflow: hidden;
   flex-direction: column;
+  background: hsla(160, 100%, 25%, 0.1);
 }
 
 .aside:hover > div {
@@ -188,10 +189,29 @@ body:has(#id:not(:placeholder-shown)) #new {
 
 .editorWrap {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  align-content: baseline;
+  align-content: space-between;
   overflow: hidden;
   flex-direction: column;
+}
 
+
+.client {
+  border: 1px solid hsl(33, 100%, 50%);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1vmin;
+  align-items: center;
+}
+
+h3{
+  text-align: center;
+  margin: .5vmin;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .aside:hover {
+    -webkit-backdrop-filter: blur(.25vmax);
+    backdrop-filter: blur(.25vmax);
+  }
 }

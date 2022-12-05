@@ -90,9 +90,8 @@ const EditorPage = () => {
     <div className="mainWrap">
       <div className="aside">
         <img className="logoImage" src="/code-sync.png" alt="logo" />
-
         <div className="asideInner">
-          <h3>Connected</h3>
+          <h3>Members</h3>
           <div className="clientsList">
             {clients.map((client) => (
               <Client key={client.socketId} username={client.username} />
