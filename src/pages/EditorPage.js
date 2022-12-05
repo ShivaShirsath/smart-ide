@@ -27,7 +27,9 @@ const EditorPage = () => {
 
       function handleErrors(e) {
         console.log("socket error", e);
-        toast.error("Socket connection failed, try again later.");
+        toast("Socket connection failed, try again later.", {
+          icon: "❌",
+        });
         reactNavigator("/");
       }
 
@@ -41,7 +43,9 @@ const EditorPage = () => {
         ACTIONS.JOINED,
         ({ clients, username, socketId }) => {
           if (username !== location.state?.username) {
-            toast.success(`${username} joined the room.`);
+            toast(`${username} joined the room.`, {
+              icon: "🤝",
+            });
             console.log(`${username} joined`);
           }
           setClients(clients);
@@ -54,7 +58,9 @@ const EditorPage = () => {
 
       // Listening for disconnected
       socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
-        toast.success(`${username} left the room.`);
+        toast(`${username} left the room.`, {
+          icon: "☹",
+        });
         setClients((prev) => {
           return prev.filter((client) => client.socketId !== socketId);
         });
@@ -71,9 +77,13 @@ const EditorPage = () => {
   async function copyRoomId() {
     try {
       await navigator.clipboard.writeText(roomId);
-      toast.success("Room ID has been copied to your clipboard");
+      toast("Room ID has been copied to your Clipboard !", {
+        icon: "📋",
+      });
     } catch (err) {
-      toast.error("Could not copy the Room ID");
+      toast("Could not copy the Room ID", {
+        icon: "📋",
+      });
       console.error(err);
     }
   }
@@ -89,7 +99,7 @@ const EditorPage = () => {
   return (
     <div className="mainWrap">
       <div className="aside">
-        <img className="logoImage" src="/code-sync.png" alt="logo" />
+        <img src="/code-sync.png" alt="logo" />
         <div className="asideInner">
           <h3>Members</h3>
           <div className="clientsList">

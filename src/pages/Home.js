@@ -12,12 +12,16 @@ const Home = () => {
     e.preventDefault();
     const id = uuidV4();
     setRoomId(id);
-    toast.success("Created a new room");
+    toast("Created a new room", {
+      icon: "✔",
+    });
   };
 
   const joinRoom = () => {
     if (!roomId || !username) {
-      toast.error("ROOM ID & username is required");
+      toast("ROOM ID & username is required", {
+        icon: "🥺",
+      });
       return;
     }
 
@@ -36,11 +40,13 @@ const Home = () => {
   };
   return (
     <div className="formWrapper">
+      <header>
+        <img src="/code-sync.png" alt="logo" />
+      </header>
       <div className="inputGroup">
         <input
           type="text"
           id="id"
-          className="inputBox"
           placeholder="ROOM ID"
           onChange={(e) => setRoomId(e.target.value)}
           value={roomId}
@@ -49,8 +55,7 @@ const Home = () => {
         <input
           type="text"
           id="user"
-          className="inputBox"
-          placeholder="USERNAME"
+          placeholder="USER NAME"
           minlength="3"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
@@ -62,7 +67,6 @@ const Home = () => {
         <input
           type="button"
           id="join"
-          className="inputBtnBox"
           onClick={joinRoom}
           value="Join with ID"
         />
@@ -70,7 +74,6 @@ const Home = () => {
           onClick={createNewRoom}
           type="button"
           id="new"
-          className="inputBtnBox"
           value="NEW ROOM ID"
         />
       </div>
