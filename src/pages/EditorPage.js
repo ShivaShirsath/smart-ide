@@ -124,7 +124,7 @@ const EditorPage = () => {
         </button>
       </div>
       <div className="editorWrap">
-        <iframe srcDoc={html} />
+        <iframe title="output" srcDoc={html} />
         <Editor
           socketRef={socketRef}
           roomId={roomId}
