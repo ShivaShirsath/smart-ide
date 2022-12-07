@@ -10,7 +10,7 @@ export default function PrivateRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) => {
-        return currentUser ? <Component {...props} /> : <Login />;
+        return currentUser ? <Component {...props} /> : <h1 >ZZZ</h1>;
       }}
     ></Route>
   );

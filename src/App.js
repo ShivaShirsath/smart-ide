@@ -1,26 +1,32 @@
-import React from "react";
-import { AuthProvider } from "./firebase/AuthContext";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import Dashboard from "./activities/Dashboard";
-import PrivateRoute from "./firebase/PrivateRoute";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Home from "./pages/Home";
+import EditorPage from "./pages/EditorPage";
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Switch>
-          <PrivateRoute exact path="/" component={Dashboard} />
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </AuthProvider>
-    </Router>
+    <>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={2}
+        toastOptions={{
+          icon: "✅",
+          style: {
+            borderRadius: "1.5vmin",
+            background: "hsla(0, 0%, 0%, 0.5)",
+            backdropFilter: "blur(.25vmax)",
+            color: "#fff",
+          },
+        }}
+      />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/editor/:roomId" element={<EditorPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
