@@ -88,6 +88,10 @@ const EditorPage = () => {
     }
   }
 
+  function vInput(){
+
+  }
+  
   function leaveRoom() {
     reactNavigator("/");
   }
@@ -98,8 +102,12 @@ const EditorPage = () => {
 
   return (
     <div className="mainWrap">
+      <button className="vin" onClick={vInput}>
+          {"🎙"}
+        </button>
       <div className="aside">
         <img src="/code-sync.png" alt="logo" />
+        
         <div className="asideInner">
           <h3>Members</h3>
           <div className="clientsList">

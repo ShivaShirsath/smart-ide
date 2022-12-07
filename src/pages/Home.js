@@ -13,7 +13,6 @@ const Home = () => {
     const id = uuidV4();
     setRoomId(id);
     toast("Created a new room", {
-      icon: "✔",
     });
   };
 
@@ -55,8 +54,8 @@ const Home = () => {
         <input
           type="text"
           id="user"
+          minLength={3}
           placeholder="USER NAME"
-          minlength="3"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           onKeyUp={handleInputEnter}

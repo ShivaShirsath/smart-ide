@@ -5,8 +5,8 @@ const Client = ({ username }) => {
   return (
     <div className="client">
       <Avatar
-        name={username}
         githubHandle={username}
+        name={username}
         size="7.5vmin"
         round="1.5vmin"
       />

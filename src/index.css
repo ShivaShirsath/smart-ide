@@ -182,7 +182,7 @@ input:focus {
   outline: 0.125vmin solid hsl(39, 100%, 50%);
 }
 
-body:has(.inputBox:invalid, .inputBox:placeholder-shown) #join {
+body:has(input[type="text"]:invalid, input[type="text"]:placeholder-shown) #join {
   pointer-events: none;
   color: hsl(0, 0%, 0%);
   opacity: 0.5;
@@ -236,3 +236,21 @@ h3 {
   width: 10vmax;
   height: 10vmax;
 }
+
+.vin {
+  position: absolute;
+  z-index: 100;
+  width: 7.5vmax;
+  height: 7.5vmax;
+  bottom: 1vmin;
+  border: .5vmin solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 250%;
+}
+
+
+
+
+

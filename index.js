@@ -1,10 +1,10 @@
 const express = require("express");
-const app = express();
 const http = require("http");
 const path = require("path");
 const { Server } = require("socket.io");
 const ACTIONS = require("./src/Actions");
 
+const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
@@ -26,21 +26,25 @@ function getAllConnectedClients(roomId) {
   );
 }
 
-io.on("connection", (socket) => {
-  console.log("socket connected", socket.id);
-
+io.on(ACTIONS.CONNECTION, (socket) => {
+  
   socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
     userSocketMap[socket.id] = username;
     socket.join(roomId);
+    
     const clients = getAllConnectedClients(roomId);
     clients.forEach(({ socketId }) => {
+      
       io.to(socketId).emit(ACTIONS.JOINED, {
         clients,
         username,
         socketId: socket.id,
       });
     });
+    
+  console.log("\nSocket :", socket.id,"\nRoom   :", roomId, "\nUser   :", username);
   });
+
 
   socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
     socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
@@ -50,7 +54,7 @@ io.on("connection", (socket) => {
     io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code });
   });
 
-  socket.on("disconnecting", () => {
+  socket.on(ACTIONS.DISCONNECTING, () => {
     const rooms = [...socket.rooms];
     rooms.forEach((roomId) => {
       socket.in(roomId).emit(ACTIONS.DISCONNECTED, {
@@ -64,4 +68,4 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+server.listen(PORT, () => console.log(process.env.REACT_APP_BACKEND_URL || `Server : "http://localhost:${PORT}"`));
