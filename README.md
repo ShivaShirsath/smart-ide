@@ -2,7 +2,7 @@
   <a href=https://smart-ide.web.app>
     ‣
   </a>
-  <br>
+  <hr />
   <a href=https://smart-ide.vercel.app>
     ⋆
   </a>
