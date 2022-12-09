@@ -72,4 +72,4 @@ io.on(ACTIONS.CONNECTION, (socket) => {
 });
 
 const PORT = process.env.PORT || 1337;
-server.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`${__dirname || PORT}`));
