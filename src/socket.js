@@ -7,5 +7,5 @@ export const initSocket = async () => {
 		timeout: 10000,
 		transports: ["websocket"],
 	};
-	return io("https://smart-ide.vercel.app", options);
+	return io("https://smart-ide-server.onrender.com", options);
 };
