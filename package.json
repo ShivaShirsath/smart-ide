@@ -23,8 +23,8 @@
 	"scripts": {
 		"init": "echo 'REACT_APP_BACKEND_URL=http://localhost:1337' > .env && ln -s /data/data/vn.vhn.vsc/files/lib/node_modules .",
 		"front": "react-scripts start",
-		"start": "CI=false npm run build && npm run server",
-		"build": "react-scripts build",
+		"start": "npm run build && npm run server",
+		"build": "CI=false react-scripts build",
 		"dev": "nodemon index.js",
 		"server": "node index.js"
 	},
