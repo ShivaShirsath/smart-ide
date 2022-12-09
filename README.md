@@ -3,7 +3,7 @@
     ‣
   </a>
   <br>
-  <a href=https://ShivaShirsath.github.io/smart-ide>
-    ⋅
+  <a href=https://smart-ide.vercel.app>
+    ⋆
   </a>
 </h1>
