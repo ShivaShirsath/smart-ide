@@ -7,5 +7,5 @@ export const initSocket = async () => {
 		timeout: 10000,
 		transports: ["websocket"],
 	};
-	return io("https://noise-make.codedamn.app:1337", options);
+	return io("https://smart-ide.vercel.app", options);
 };
