@@ -3,7 +3,7 @@
     ‣
   </a>
   <hr />
-  <a href=https://smart-ide.vercel.app>
+  <a href=https://smart-ide-server.onrender.com>
     ⋆
   </a>
 </h1>
