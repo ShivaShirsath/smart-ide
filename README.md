@@ -2,7 +2,7 @@
   <a href=https://smart-ide.web.app>
     ‣
   </a>
-  <hr />
+  <hr/>
   <a href=https://smart-ide-server.onrender.com>
     ⋆
   </a>
