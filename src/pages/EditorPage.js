@@ -74,6 +74,10 @@ const EditorPage = () => {
 		};
 	}, []);
 
+	if (!location.state) {
+		return <Navigate to="/" />;
+	}
+
 	async function copyRoomId() {
 		try {
 			await navigator.clipboard.writeText(roomId);
@@ -82,7 +86,7 @@ const EditorPage = () => {
 			});
 		} catch (err) {
 			toast("Could not copy the Room ID", {
-				icon: "📋",
+				icon: "❌",
 			});
 			console.error(err);
 		}
@@ -92,10 +96,6 @@ const EditorPage = () => {
 
 	function leaveRoom() {
 		reactNavigator("/");
-	}
-
-	if (!location.state) {
-		return <Navigate to="/" />;
 	}
 
 	return (
