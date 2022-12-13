@@ -65,7 +65,8 @@ io.on(ACTIONS.CONNECTION, (socket) => {
 		rooms.forEach((roomId) => {
 			socket.in(roomId).emit(ACTIONS.DISCONNECTED, {
 				socketId: socket.id,
-				username: userSocketMap[socket.id],
+				username: userSocketMap[socket.id].username,
+				photo: userSocketMap[socket.id].photo,
 			});
 		});
 		delete userSocketMap[socket.id];
