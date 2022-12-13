@@ -1,16 +1,26 @@
-import Auth from "./components/auth";
-import Dashboard from "./components/dashboard";
-import { useUserContext } from "./context/userContext";
+import React from "react";
+import Account from "./components/Account";
+import { Route, Routes } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { Navigate } from "react-router-dom";
 
 function App() {
-  const { user, loading, error } = useUserContext();
-
-  return (
-    <div>
-      {error && {error}}
-      {loading ? <h2>Loading...</h2> : <> {user ? <Dashboard /> : <Auth />} </>}
-    </div>
-  );
+	return (
+		<AuthContextProvider>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<ProtectedRoute>
+							<Account />
+						</ProtectedRoute>
+					}
+				/>
+				<Route path="*" element={<Navigate to="/" />} />
+			</Routes>
+		</AuthContextProvider>
+	);
 }
 
 export default App;
