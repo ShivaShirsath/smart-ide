@@ -8,14 +8,12 @@ import {
 	useLocation,
 	useNavigate,
 	Navigate,
-	useParams,
 } from "react-router-dom";
 
 const EditorPage = () => {
 	const socketRef = useRef(null);
 	const codeRef = useRef(null);
 	const location = useLocation();
-	const { roomId } = useParams();
 	const reactNavigator = useNavigate();
 	const [clients, setClients] = useState([]);
 	const [html, setHtml] = useState("");
@@ -34,7 +32,8 @@ const EditorPage = () => {
 			}
 
 			socketRef.current.emit(ACTIONS.JOIN, {
-				roomId,
+				roomId: location.state?.roomId,
+				photo: location.state?.photo,
 				username: location.state?.username,
 			});
 
@@ -80,7 +79,7 @@ const EditorPage = () => {
 
 	async function copyRoomId() {
 		try {
-			await navigator.clipboard.writeText(roomId);
+			await navigator.clipboard.writeText(location.state?.roomId);
 			toast("Room ID has been copied to your Clipboard !", {
 				icon: "📋",
 			});
@@ -100,7 +99,9 @@ const EditorPage = () => {
 
 	return (
 		<div className="mainWrap">
-			<button className="vin" onClick={vInput}>🎙</button>
+			<button className="vin" onClick={vInput}>
+				🎙
+			</button>
 			<div className="aside">
 				<img src="/code-sync.png" alt="logo" />
 
@@ -108,7 +109,11 @@ const EditorPage = () => {
 					<h3>Members</h3>
 					<div className="clientsList">
 						{clients.map((client) => (
-							<Client key={client.socketId} username={client.username} />
+							<Client
+								key={client.socketId}
+								photo={client.photo}
+								username={client.username}
+							/>
 						))}
 					</div>
 				</div>
@@ -123,7 +128,7 @@ const EditorPage = () => {
 				<iframe title="output" srcDoc={html} />
 				<Editor
 					socketRef={socketRef}
-					roomId={roomId}
+					roomId={location.state?.roomId}
 					onCodeChange={(code) => {
 						codeRef.current = code;
 						setHtml(codeRef.current);

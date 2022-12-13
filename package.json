@@ -7,9 +7,8 @@
 		"codemirror": "^5.65.2",
 		"firebase": "^9.15.0",
 		"express": "^4.17.3",
-		"react": "^17.0.2",
-		"react-avatar": "^4.0.0",
-		"react-dom": "^17.0.2",
+		"react": "18",
+		"react-dom": "18",
 		"react-hot-toast": "^2.2.0",
 		"react-router-dom": "^6.4.4",
 		"react-scripts": "^5.0.1",
@@ -21,7 +20,9 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"init": "echo 'REACT_APP_BACKEND_URL=http://localhost:1337' > .env && ln -s /data/data/vn.vhn.vsc/files/lib/node_modules .",
+		"init": "npm run back && npm run link",
+		"back": "echo 'REACT_APP_BACKEND_URL=http://0.0.0.0:1337' > .env",
+		"link": "ln -s ~/../lib/node_modules .",
 		"front": "react-scripts start",
 		"start": "npm run build && npm run server",
 		"build": "CI=false react-scripts build",

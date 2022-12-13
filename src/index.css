@@ -20,19 +20,14 @@ body {
 	border-radius: 1.5vmin;
 }
 
-.homePageWrapper {
-	display: flex;
-	color: hsl(0, 0%, 100%);
-}
-
-.formWrapper {
+main {
 	position: fixed;
 	top: 12.5vh;
 	right: 12.5vw;
 	bottom: 12.5vh;
 	left: 12.5vw;
 	background: hsla(30, 100%, 36%, 0.226);
-	padding: 2.5vmin;
+	padding: 0 2.5vmin;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -51,17 +46,33 @@ footer a {
 	color: hsl(50, 100%, 50%);
 }
 
-.inputGroup,
-.inputBtnGroup {
+section {
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 }
 
-.inputBtnGroup {
+section:has(input[type="button"]) {
 	flex-direction: row-reverse;
 }
 
+section > * {
+	text-align: center;
+}
+
+main > button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: transparent;
+	border: none;
+}
+main > button > * {
+	margin: 0;
+	padding: 0;
+}
 input {
+	flex: 1;
 	border: none;
 	outline: none;
 	margin: 1.25% 1.25%;
@@ -95,7 +106,8 @@ footer a:hover {
 	left: 0.5%;
 }
 
-.aside, .vin {
+.aside,
+.vin {
 	transition: all 0.3s linear;
 	border: 0.5vmin solid gray;
 	padding: 1vmin;
@@ -131,9 +143,19 @@ img {
 }
 
 .client {
+	border: 1px solid hsl(30, 100%, 50%);
 	display: flex;
+	flex-wrap: wrap;
+	padding: 1vmin;
+	align-items: center;
 	flex-direction: column;
 	font-weight: bold;
+}
+.client > img {
+	border: 0.25vmin solid orange;
+
+	width: 10vmin;
+	aspect-ratio: 1;
 }
 
 .CodeMirror {
@@ -211,14 +233,6 @@ body:has(#id:not(:placeholder-shown)) #new {
 	flex-direction: column;
 }
 
-.client {
-	border: 1px solid hsl(30, 100%, 50%);
-	display: flex;
-	flex-wrap: wrap;
-	padding: 1vmin;
-	align-items: center;
-}
-
 h3 {
 	text-align: center;
 	margin: 0.5% 0.5%;
@@ -231,12 +245,12 @@ h3 {
 	}
 }
 
-.formWrapper > header {
+main > header {
 	display: flex;
 	justify-content: space-around;
 }
 
-.formWrapper > header > img {
+main > header > img {
 	width: 25vmin;
 	aspect-ratio: 1;
 }
@@ -245,4 +259,31 @@ h3 {
 	left: 0;
 	font-size: 5.25vh;
 	line-height: 5.25vh;
+}
+
+main:has(loading) {
+	padding: 0;
+}
+
+loading {
+	height: 100%;
+	width: 100%;
+	box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.05);
+}
+
+loading {
+	background: linear-gradient(
+		95deg,
+		#ececec88 8%,
+		#f5f5f588 18%,
+		#ececec88 33%
+	);
+	background-size: 200% 200%;
+	animation: 0.25s shine linear infinite;
+}
+
+@keyframes shine {
+	to {
+		background-position-x: -200%;
+	}
 }

@@ -20,15 +20,16 @@ function getAllConnectedClients(roomId) {
 		(socketId) => {
 			return {
 				socketId,
-				username: userSocketMap[socketId],
+				username: userSocketMap[socketId].username,
+				photo: userSocketMap[socketId].photo,
 			};
 		},
 	);
 }
 
 io.on(ACTIONS.CONNECTION, (socket) => {
-	socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
-		userSocketMap[socket.id] = username;
+	socket.on(ACTIONS.JOIN, ({ roomId, photo, username }) => {
+		userSocketMap[socket.id] = { username, photo };
 		socket.join(roomId);
 
 		const clients = getAllConnectedClients(roomId);
@@ -36,6 +37,7 @@ io.on(ACTIONS.CONNECTION, (socket) => {
 			io.to(socketId).emit(ACTIONS.JOINED, {
 				clients,
 				username,
+				photo,
 				socketId: socket.id,
 			});
 		});

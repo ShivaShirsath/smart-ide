@@ -1,15 +1,9 @@
 import React from "react";
-import Avatar from "react-avatar";
 
-const Client = ({ username }) => {
+const Client = ({ username, photo }) => {
 	return (
 		<div className="client">
-			<Avatar
-				githubHandle={username}
-				name={username}
-				size="7.5vmin"
-				round="1.5vmin"
-			/>
+			<img src={photo} alt={username} />
 			<span>{username}</span>
 		</div>
 	);
