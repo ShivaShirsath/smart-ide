@@ -6,9 +6,9 @@ specifiers:
   firebase: ^9.15.0
   nodemon: ^2.0.20
   react: '18'
-  react-avatar: ^4.0.0
   react-dom: '18'
   react-hot-toast: ^2.2.0
+  react-parallax-tilt: ^1.7.76
   react-router-dom: ^6.4.4
   react-scripts: ^5.0.1
   react-speech-kit: ^3.0.1
@@ -23,9 +23,9 @@ dependencies:
   express: 4.18.2
   firebase: 9.15.0
   react: 18.2.0
-  react-avatar: 4.1.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hot-toast: 2.4.0_biqbaboplfbrettd7655fr4n2y
+  react-parallax-tilt: 1.7.76_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.4.5_biqbaboplfbrettd7655fr4n2y
   react-scripts: 5.0.1_react@18.2.0
   react-speech-kit: 3.0.1_react@18.2.0
@@ -3910,10 +3910,6 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
-  /charenc/0.0.2:
-    resolution: {integrity: sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==}
-    dev: false
-
   /check-types/11.2.2:
     resolution: {integrity: sha512-HBiYvXvn9Z70Z88XKjz3AEKd4HJhBXsa3j7xFnITAzoS8+q6eIGi8qDB8FKPBAjtuxjI/zFpwuiCb8oDtKOYrA==}
     dev: false
@@ -4167,10 +4163,6 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
-    dev: false
-
-  /crypt/0.0.2:
-    resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
     dev: false
 
   /crypto-random-string/2.0.0:
@@ -6069,10 +6061,6 @@ packages:
       has-tostringtag: 1.0.0
     dev: false
 
-  /is-buffer/1.1.6:
-    resolution: {integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==}
-    dev: false
-
   /is-callable/1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
@@ -6167,10 +6155,6 @@ packages:
   /is-regexp/1.0.0:
     resolution: {integrity: sha512-7zjFAPO4/gwyQAAgRRmqeEeyIICSdmCqa3tsVHMdBzaXXRiqopZL4Cyghg/XulGWrtABTpbnYYzzIRffLkP4oA==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /is-retina/1.0.3:
-    resolution: {integrity: sha512-/tCmbIETZwCd8uHWO+GvbRa7jxwHFHdfetHfiwoP0aN9UDf3prUJMtKn7iBFYipYhqY1bSTjur8hC/Dakt8eyw==}
     dev: false
 
   /is-root/2.1.0:
@@ -7130,14 +7114,6 @@ packages:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
     dependencies:
       tmpl: 1.0.5
-    dev: false
-
-  /md5/2.3.0:
-    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
-    dependencies:
-      charenc: 0.0.2
-      crypt: 0.0.2
-      is-buffer: 1.1.6
     dev: false
 
   /mdn-data/2.0.14:
@@ -8641,19 +8617,6 @@ packages:
       whatwg-fetch: 3.6.2
     dev: false
 
-  /react-avatar/4.1.0_react@18.2.0:
-    resolution: {integrity: sha512-hmf+q8zNbhEhjDwBQgD8EkY86qyvdw9/Vyhs2oyq6Z86wFQ1B2uLv/SrhSGubKqxd+AQNvEDmMefqWZf9dca0A==}
-    peerDependencies:
-      '@babel/runtime': '>=7'
-      core-js-pure: '>=3'
-      prop-types: ^15.0.0 || ^16.0.0
-      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      is-retina: 1.0.3
-      md5: 2.3.0
-      react: 18.2.0
-    dev: false
-
   /react-dev-utils/12.0.1_2godrbid5dlikbzpspaxqblgd4:
     resolution: {integrity: sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==}
     engines: {node: '>=14'}
@@ -8733,6 +8696,16 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-parallax-tilt/1.7.76_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-aLFknLmDb67ALQyWFPZNYYNwLYO3JM+e5Vqx51jmkiMGMOmbjkzoghH2skqQuTq+l+BLxC5N0OyyTkiyfpFNww==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-refresh/0.11.0:

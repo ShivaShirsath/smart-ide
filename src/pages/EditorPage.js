@@ -4,11 +4,8 @@ import ACTIONS from "../Actions";
 import Client from "../components/Client";
 import Editor from "../components/Editor";
 import { initSocket } from "../socket";
-import {
-	useLocation,
-	useNavigate,
-	Navigate,
-} from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import Tilt from "react-parallax-tilt";
 
 const EditorPage = () => {
 	const socketRef = useRef(null);
@@ -98,44 +95,61 @@ const EditorPage = () => {
 	}
 
 	return (
-		<div className="mainWrap">
-			<button className="vin" onClick={vInput}>
-				🎙
-			</button>
-			<div className="aside">
-				<img src="/code-sync.png" alt="logo" />
+		<main>
+			<section id="tilt">
+				<Tilt
+					className="parallax-effect"
+					perspective={5500}
+					glareEnable={true}
+					glareMaxOpacity={0.5}
+					glareColor="#ffffff"
+					glarePosition="center"
+					glareBorderRadius="2.5vmin">
+					<div className="inner-element">
+						<div>
+							<div className="mainWrap">
+								<button className="vin" onClick={vInput}>
+									🎙
+								</button>
+								<div className="aside">
+									<img src="/code-sync.png" alt="logo" />
 
-				<div className="asideInner">
-					<h3>Members</h3>
-					<div className="clientsList">
-						{clients.map((client) => (
-							<Client
-								key={client.socketId}
-								photo={client.photo}
-								username={client.username}
-							/>
-						))}
+									<div className="asideInner">
+										<h3>Members</h3>
+										<div className="clientsList">
+											{clients.map((client) => (
+												<Client
+													key={client.socketId}
+													photo={client.photo}
+													username={client.username}
+												/>
+											))}
+										</div>
+									</div>
+									<button id="copy" onClick={copyRoomId}>
+										Copy ROOM ID
+									</button>
+									<button id="leave" onClick={leaveRoom}>
+										Leave ROOM
+									</button>
+								</div>
+								<div className="editorWrap">
+									<iframe title="output" srcDoc={html} />
+									<Editor
+										socketRef={socketRef}
+										roomId={location.state?.roomId}
+										onCodeChange={(code) => {
+											codeRef.current = code;
+											setHtml(codeRef.current);
+										}}
+									/>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-				<button id="copy" onClick={copyRoomId}>
-					Copy ROOM ID
-				</button>
-				<button id="leave" onClick={leaveRoom}>
-					Leave ROOM
-				</button>
-			</div>
-			<div className="editorWrap">
-				<iframe title="output" srcDoc={html} />
-				<Editor
-					socketRef={socketRef}
-					roomId={location.state?.roomId}
-					onCodeChange={(code) => {
-						codeRef.current = code;
-						setHtml(codeRef.current);
-					}}
-				/>
-			</div>
-		</div>
+				</Tilt>{" "}
+			</section>{" "}
+		</main>
 	);
 };
 

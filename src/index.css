@@ -1,44 +1,113 @@
 * {
+	background: none;
 	touch-action: none;
 	box-sizing: border-box;
 	font-family: Courier New;
 }
 
+body,
+main,
+#root,
+footer,
+.mainWrap,
+.aside,
+.vin {
+	position: fixed;
+}
+
+#root,
+body,
+.mainWrap {
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
 body {
 	margin: 0.5% 0.5%;
 	padding: 0.5% 0.5%;
 	font-family: "Courier New";
-	background: hsla(0, 0%, 0%, 0);
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
 }
 
 * {
 	border-radius: 1.5vmin;
 }
+#root,
+.aside,
+.vin,
+.aside:hover,
+.editorWrap,
+.inner-element {
+	overflow: hidden;
+}
+#root {
+	background: linear-gradient(120deg, #ff8844, #8844ff, #44ff88);
+	background-size: 500%;
+	background-repeat: no-repeat;
+	animation: gradient 15s linear infinite;
+}
 
-main {
-	position: fixed;
-	top: 12.5vh;
-	right: 12.5vw;
-	bottom: 12.5vh;
-	left: 12.5vw;
-	background: hsla(30, 100%, 36%, 0.226);
-	padding: 0 2.5vmin;
+@keyframes gradient {
+	0%,
+	100% {
+		background-position: 100% 100%;
+	}
+	50% {
+		background-position: 0% 0%;
+	}
+}
+
+.clientsList,
+main > #tilt,
+.inner-element {
+	display: flex;
+}
+
+section,
+.mainWrap,
+.aside,
+.vin,
+.client,
+.aside:hover,
+.editorWrap {
+	display: flex;
+	flex-direction: column;
+}
+
+main,
+.parallax-effect,
+.inner-element {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
+main {
+	top: 10%;
+	right: 10%;
+	bottom: 10%;
+	left: 10%;
+
+	padding: 0 2.5vmin;
+}
+
+main:has(.mainWrap) {
+	top: 2.5%;
+	right: 2.5%;
+	bottom: 2.5%;
+	left: 2.5%;
+}
+
+h3,
+section > *,
 footer {
-	position: fixed;
+	text-align: center;
+}
+
+footer {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	text-align: center;
 }
 
 footer a {
@@ -46,45 +115,44 @@ footer a {
 	color: hsl(50, 100%, 50%);
 }
 
-section {
-	display: flex;
-	flex-direction: column;
+.client,
+section,
+.clientsList {
 	flex-wrap: wrap;
 }
+section {
+	align-items: stretch;
+}
 
-section:has(input[type="button"]) {
-	flex-direction: row-reverse;
+section:has(button) {
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 section > * {
-	text-align: center;
+	flex-grow: 1;
 }
 
-main > button {
-	position: absolute;
-	top: 0;
-	right: 0;
-	background: transparent;
-	border: none;
+section > button {
+	margin: 0.5vmin;
+	flex-grow: 0.05;
+	font-size: xx-large;
 }
-main > button > * {
-	margin: 0;
-	padding: 0;
-}
+
 input {
 	flex: 1;
 	border: none;
 	outline: none;
 	margin: 1.25% 1.25%;
 	padding: 2.5% 2.5%;
-	background: hsla(0, 0%, 100%, 0.75);
 	font-weight: bold;
+	background: hsl(0, 0%, 0%, 0.1);
 }
 
 input[type="button"] {
 	cursor: pointer;
-	background: #0000;
-	color: hsl(0, 0%, 100%);
+	background: hsl(0, 0%, 0%, 0.025);
+
 	border-top: 1vmin solid hsl(30, 100%, 50%);
 	border-bottom: 1vmin solid hsl(120, 100%, 40%);
 	transition: all 0.3s ease-in-out;
@@ -96,29 +164,17 @@ footer a:hover {
 	border-color: hsla(30, 43%, 37%, 0.55);
 }
 
-.mainWrap {
-	display: flex;
-	flex-direction: column;
-	position: fixed;
-	top: 0.5%;
-	right: 0.5%;
-	bottom: 0.5%;
-	left: 0.5%;
-}
-
 .aside,
 .vin {
 	transition: all 0.3s linear;
 	border: 0.5vmin solid gray;
 	padding: 1vmin;
-	display: flex;
-	flex-direction: column;
+
 	align-self: center;
-	position: fixed;
 	right: 1%;
 	bottom: 1%;
 	z-index: 100;
-	overflow: hidden;
+
 	height: 7.5vh;
 	aspect-ratio: 1;
 }
@@ -129,31 +185,38 @@ img {
 	margin: 2.5% 2.5%;
 }
 
+.asideInner,
+.client,
+.client > img {
+	border: 0.25vmin solid orange;
+}
 .asideInner {
 	margin: 1% 1%;
 	padding: 1% 1%;
-	border: 0.25vmin solid orange;
+
 	flex: 1;
 }
 
 .clientsList {
-	display: flex;
-	flex-wrap: wrap;
 	gap: 1vmin;
 }
 
-.client {
-	border: 1px solid hsl(30, 100%, 50%);
-	display: flex;
-	flex-wrap: wrap;
-	padding: 1vmin;
+.client,
+.aside:hover,
+.editorWrap,
+.inner-element,
+.inner-element > div,
+.inner-element > loading {
 	align-items: center;
-	flex-direction: column;
+}
+
+.client {
+	padding: 1vmin;
+
 	font-weight: bold;
 }
-.client > img {
-	border: 0.25vmin solid orange;
 
+.client > img {
 	width: 10vmin;
 	aspect-ratio: 1;
 }
@@ -162,27 +225,35 @@ img {
 	min-height: 59vh;
 	min-width: 100%;
 	line-height: 1.6;
+	background: transparent;
+}
+
+iframe,
+.aside:hover > div,
+main > #tilt,
+.parallax-effect,
+.inner-element,
+.inner-element > div,
+.inner-element > loading {
+	width: 100%;
 }
 
 iframe {
 	min-height: 39vh;
-	width: 100%;
 }
 
 .aside:hover {
 	width: 80%;
 	height: 80%;
-	display: flex;
+
 	justify-content: space-between;
-	align-items: center;
+
 	align-content: baseline;
-	overflow: hidden;
-	flex-direction: column;
+
 	background: hsla(160, 100%, 20%, 0.1);
 }
 
 .aside:hover > div {
-	width: 100%;
 	margin: 0.5% 0.5%;
 }
 
@@ -196,12 +267,10 @@ iframe {
 
 .aside:hover > #copy:hover {
 	background: green;
-	color: white;
 }
 
 .aside:hover > #leave:hover {
 	background: red;
-	color: white;
 }
 
 .aside:hover > img {
@@ -212,29 +281,29 @@ input:focus {
 	outline: 0.125vmin solid hsl(30, 100%, 50%);
 }
 
+input:disabled,
+section > button {
+	background: none;
+	outline: none;
+	border: none;
+}
+
 body:has(input[type="text"]:invalid, input[type="text"]:placeholder-shown)
 	#join {
 	pointer-events: none;
-	color: hsl(0, 0%, 0%);
 	opacity: 0.5;
 }
 
 body:has(#id:not(:placeholder-shown)) #new {
 	pointer-events: none;
-	color: hsl(0, 0%, 0%);
 	opacity: 0.5;
 }
 
 .editorWrap {
-	display: flex;
-	align-items: center;
 	align-content: space-between;
-	overflow: hidden;
-	flex-direction: column;
 }
 
 h3 {
-	text-align: center;
 	margin: 0.5% 0.5%;
 }
 
@@ -245,13 +314,21 @@ h3 {
 	}
 }
 
-main > header {
-	display: flex;
+main > #tilt,
+.parallax-effect,
+.inner-element > div,
+.inner-element > loading,
+.inner-element {
+	height: 100%;
+}
+
+main > #tilt {
 	justify-content: space-around;
 }
 
-main > header > img {
+section > img {
 	width: 25vmin;
+	margin: auto;
 	aspect-ratio: 1;
 }
 
@@ -265,9 +342,13 @@ main:has(loading) {
 	padding: 0;
 }
 
+main:has(#tilt) {
+	outline: none;
+	border: none;
+	background: none;
+}
+
 loading {
-	height: 100%;
-	width: 100%;
 	box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.05);
 }
 
@@ -286,4 +367,61 @@ loading {
 	to {
 		background-position-x: -200%;
 	}
+}
+
+.parallax-effect {
+	transform-style: preserve-3d;
+}
+
+.inner-element {
+	transform: translateZ(60px);
+
+	background: rgba(255, 255, 255, 0.025);
+	border-radius: 2.5vmin;
+	box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(2.5vmin);
+	-webkit-backdrop-filter: blur(2.5vmin);
+	border: 0.0125vmin solid rgba(255, 255, 255, 0.5);
+}
+
+#xx {
+	border: 1vmin solid red;
+}
+
+#form {
+	height: auto;
+	padding: 2.5vmin;
+}
+
+pre {
+	text-align: left;
+}
+
+img {
+	background: transparent;
+}
+
+iframe {
+	background: white;
+}
+
+#google,
+#github {
+	background-size: 100% 100%;
+	width: 25vmin;
+	aspect-ratio: 1;
+	border: none;
+	outline: none;
+}
+
+section:has(#google) {
+	justify-content: space-around;
+}
+
+#google {
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20200429221626%21Google_%22G%22_Logo.svg);
+}
+
+#github {
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/95/Font_Awesome_5_brands_github.svg);
 }
