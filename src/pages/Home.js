@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import Tilt from "react-parallax-tilt";
+
 const Home = () => {
 	const navigate = useNavigate();
 
