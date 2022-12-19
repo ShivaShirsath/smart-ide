@@ -21,8 +21,8 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"init": "npm run back && npm run link",
-		"back": "echo 'REACT_APP_BACKEND_URL=http://0.0.0.0:1337' > .env",
+                "push": "git add . && git commit -m 'deploy' && git push origin master",
+		"init": "npm run link",
 		"link": "ln -s ~/../lib/node_modules .",
 		"front": "react-scripts start",
 		"start": "npm run build && npm run server",
