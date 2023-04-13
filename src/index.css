@@ -4,11 +4,11 @@
   margin: 0;
   padding: 0;
   font-size: 2.5vmin;
-  border-radius: 2.5vmin;
   background: none;
   touch-action: none;
   box-sizing: border-box;
   font-family: Courier New;
+  color: white;
 }
 
 #root {
@@ -17,7 +17,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(120deg, #ff8844, #8844ff, #44ff88);
+  background: linear-gradient(120deg, #ff8844, #44ff88, #8844ff);
   background-size: 500%;
   background-repeat: no-repeat;
   animation: gradient 15s linear infinite;
@@ -28,7 +28,6 @@
   100% {
     background-position: 100% 100%;
   }
-
   50% {
     background-position: 0% 0%;
   }
@@ -41,12 +40,12 @@ main > .tilt {
 .inner-element {
   transform: translateZ(2.5vmin);
   transform-style: preserve-3d;
-  background: rgba(255, 255, 255, 0.025);
+  background: transparent;
   border-radius: 2.5vmin;
   box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2.5vmin);
-  -webkit-backdrop-filter: blur(2.5vmin);
-  border: 0.0125vmin solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(1.25vmin);
+  -webkit-backdrop-filter: blur(1.25vmin);
+  border: 0.0125vmin solid rgba(128, 128, 128, 0.26);
 
   display: flex;
   flex-direction: column;
@@ -97,8 +96,7 @@ input:focus {
   outline: 0.125vmin solid gold;
 }
 
-body:has(input[type="text"]:invalid, input[type="text"]:placeholder-shown)
-  #join {
+body:has(input[type="text"]:invalid, input[type="text"]:placeholder-shown) #join {
   pointer-events: none;
   opacity: 0.5;
 }
@@ -152,12 +150,13 @@ body:has(#id:not(:placeholder-shown)) #join {
 }
 
 button {
-  padding: 1vmin 0;
+  padding: .5vmin 0;
+  border-radius: 1.5vmin;
 }
 
 .inner-element:has(.form) {
-  width: 100%;
-  height: 100%;
+  width: 75vmin;
+  height: 50vmin;
 }
 
 .inner-element > section {
@@ -169,16 +168,26 @@ button {
 }
 
 .inner-element > section > img {
-  width: 33%;
+  width: 25vmin;
   aspect-ratio: 1;
 }
-
+.form > section > img {
+  width: 20vmin;
+  aspect-ratio: 1;
+}
+section:has(#google){
+  flex-direction: row;
+}
+.inner-element:has(#google){
+  padding: 2.5vmin;
+}
 main {
   width: 100%;
   height: 100%;
 }
 
-main, #root {
+main,
+#root {
   padding: 1vmin;
   display: flex;
   flex-direction: column;
@@ -190,15 +199,14 @@ loading {
   width: 25vw;
   aspect-ratio: 1;
   box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.05);
+  border-radius: 2.5vmin;
 }
 
 loading {
-  background: linear-gradient(
-    95deg,
-    #ececec88 8%,
-    #f5f5f588 18%,
-    #ececec88 33%
-  );
+  background: linear-gradient(95deg,
+      #ffffff88 8%,
+      #88888888 18%,
+      #ffffff88 33%);
   background-size: 200% 200%;
   animation: 0.5s shine linear infinite;
 }
@@ -218,7 +226,7 @@ loading {
   right: 0;
   aspect-ratio: 1;
   overflow: hidden;
-
+  border-radius: 2.5vmin;
   border: 0.5vmin solid gold;
 }
 
@@ -227,7 +235,7 @@ loading {
 }
 
 .aside {
-  transition: all 500ms cubic-bezier(.75, 1.5, 1, 1.5);
+  transition: all 500ms cubic-bezier(0.75, 1.5, 1, 1.5);
 }
 
 .aside:hover {
@@ -254,7 +262,8 @@ loading {
 .aside:hover > #leave:hover {
   background: red;
 }
-.aside > section > button {
+
+.aside>section > button {
   display: none;
 }
 
@@ -274,7 +283,8 @@ loading {
 }
 
 .aside:hover > section > img {
-  width: 25%;
+  width: 20.5vmin;
+  aspect-ratio: 1;
 }
 
 .aside:hover,
@@ -284,6 +294,8 @@ loading {
   flex-grow: 1;
   padding: 1vmin;
   border: 0.5vmin solid goldenrod;
+  color: white;
+  border-radius: 2.5vmin;
 }
 
 .aside:hover > .group > section {
@@ -292,16 +304,25 @@ loading {
 }
 
 .aside:hover > .group > .clients {
-  display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  align-items: start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5vmin;
+  overflow: auto;
+}
+
+.clients > *:nth-child(3n-1):nth-last-of-type(1) {
+  grid-column: span 2;
+}
+
+.clients > *:nth-child(3n-2):nth-last-of-type(1) {
+  grid-column: span 3;
 }
 
 .client {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 2.5vmin;
 }
 
 h3 {
@@ -311,6 +332,8 @@ h3 {
 .client {
   padding: 1vmin;
   border: 0.5vmin solid goldenrod;
+  text-align: center;
+  gap: 0.5vmin;
 }
 
 .client > img {
@@ -319,8 +342,8 @@ h3 {
 }
 
 .inner-element:has(.vin) {
-  width: 90vw;
-  height: 90vh;
+  width: calc(100vw - 2.5vmin);
+  height: calc(100vh - 2.5vmin);
   justify-content: center;
   align-items: stretch;
   justify-items: stretch;
@@ -331,6 +354,17 @@ h3 {
   flex-grow: 1;
 }
 
+.inner-element:has(.vin) > iframe {
+  height: 50%;
+}
+
+
+
 iframe {
   background: white;
+}
+
+.client > img {
+  width: 7.5vmin;
+  aspect-ratio: 1;
 }

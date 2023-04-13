@@ -52,12 +52,12 @@ io.on(ACTIONS.CONNECTION, (socket) => {
 		);
 	});
 
-	socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
-		socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
+	socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code, pos }) => {
+		socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code, pos });
 	});
 
-	socket.on(ACTIONS.SYNC_CODE, ({ socketId, code }) => {
-		io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code });
+	socket.on(ACTIONS.SYNC_CODE, ({ socketId, code, pos }) => {
+		io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code, pos });
 	});
 
 	socket.on(ACTIONS.DISCONNECTING, () => {

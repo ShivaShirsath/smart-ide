@@ -109,8 +109,17 @@ const Home = () => {
                   value={roomId}
                   onKeyUp={handleInputEnter}
                 />
-                <button id="clear" onClick={()=>{setRoomId("")}}>╳</button>
-                <button id="new" onClick={createNewRoom}>┼</button>
+                <button
+                  id="clear"
+                  onClick={() => {
+                    setRoomId("");
+                  }}
+                >
+                  ╳
+                </button>
+                <button id="new" onClick={createNewRoom}>
+                  ┼
+                </button>
               </section>
               <button id="join" onClick={joinRoom}>
                 Join Room

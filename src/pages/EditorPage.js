@@ -2,10 +2,19 @@ import React, { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import ACTIONS from "../Actions";
 import Client from "../components/Client";
-import Editor from "../components/Editor";
+import Editors from "./Editor";
+import MyEditor from "./MyEditor";
 import { initSocket } from "../socket";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
+import axios from 'axios';
+
+const API_KEY = 'your_api_key_here';
+
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${API_KEY}`,
+};
 
 const EditorPage = () => {
   const socketRef = useRef(null);
@@ -14,6 +23,7 @@ const EditorPage = () => {
   const reactNavigator = useNavigate();
   const [clients, setClients] = useState([]);
   const [html, setHtml] = useState("");
+
   useEffect(() => {
     const init = async () => {
       socketRef.current = await initSocket();
@@ -88,7 +98,9 @@ const EditorPage = () => {
     }
   }
 
-  function vInput() {}
+  function vInput() {
+    
+  }
 
   function leaveRoom() {
     reactNavigator("/");
@@ -101,6 +113,8 @@ const EditorPage = () => {
         perspective={5500}
         glareEnable={true}
         glareMaxOpacity={0.45}
+        tiltEnable={false}
+        glarePosition="all"
         glareColor="#ffffff"
         glareBorderRadius="2.5vmin"
       >
@@ -133,16 +147,16 @@ const EditorPage = () => {
               </div>
             </div>
           </div>
-
           <iframe title="output" srcDoc={html} />
-          <Editor
+          <Editors
             socketRef={socketRef}
             roomId={location.state?.roomId}
             onCodeChange={(code) => {
               codeRef.current = code;
-              setHtml(codeRef.current);
+              setHtml(code);  
             }}
           />
+          {/*<MyEditor />*/}
         </div>
       </Tilt>
     </main>
