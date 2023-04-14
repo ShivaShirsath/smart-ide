@@ -3,18 +3,9 @@ import toast from "react-hot-toast";
 import ACTIONS from "../Actions";
 import Client from "../components/Client";
 import Editors from "./Editor";
-import MyEditor from "./MyEditor";
 import { initSocket } from "../socket";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
-import axios from 'axios';
-
-const API_KEY = 'your_api_key_here';
-
-const headers = {
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${API_KEY}`,
-};
 
 const EditorPage = () => {
   const socketRef = useRef(null);
@@ -98,9 +89,7 @@ const EditorPage = () => {
     }
   }
 
-  function vInput() {
-    
-  }
+  function vInput() { }
 
   function leaveRoom() {
     reactNavigator("/");
@@ -153,7 +142,7 @@ const EditorPage = () => {
             roomId={location.state?.roomId}
             onCodeChange={(code) => {
               codeRef.current = code;
-              setHtml(code);  
+              setHtml(code);
             }}
           />
           {/*<MyEditor />*/}

@@ -28,6 +28,7 @@
   100% {
     background-position: 100% 100%;
   }
+
   50% {
     background-position: 0% 0%;
   }
@@ -84,6 +85,18 @@ main > .tilt {
   flex-grow: 0.01;
 }
 
+#apiForm {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2.5vmin;
+}
+
+#apiForm > input {
+  padding: 0.5vmin;
+  flex-grow: 1;
+  margin: 0.5vmin;
+}
+
 input {
   padding: 2.5vmin;
   outline: none;
@@ -96,7 +109,8 @@ input:focus {
   outline: 0.125vmin solid gold;
 }
 
-body:has(input[type="text"]:invalid, input[type="text"]:placeholder-shown) #join {
+body:has(input[type="text"]:invalid, input[type="text"]:placeholder-shown)
+  #join {
   pointer-events: none;
   opacity: 0.5;
 }
@@ -150,7 +164,7 @@ body:has(#id:not(:placeholder-shown)) #join {
 }
 
 button {
-  padding: .5vmin 0;
+  padding: 0.5vmin 0;
   border-radius: 1.5vmin;
 }
 
@@ -171,16 +185,20 @@ button {
   width: 25vmin;
   aspect-ratio: 1;
 }
+
 .form > section > img {
   width: 20vmin;
   aspect-ratio: 1;
 }
-section:has(#google){
+
+section:has(#google) {
   flex-direction: row;
 }
-.inner-element:has(#google){
+
+.inner-element:has(#google) {
   padding: 2.5vmin;
 }
+
 main {
   width: 100%;
   height: 100%;
@@ -195,7 +213,7 @@ main,
   align-items: center;
 }
 
-loading {
+.inner-element > loading {
   width: 25vw;
   aspect-ratio: 1;
   box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.05);
@@ -203,10 +221,12 @@ loading {
 }
 
 loading {
-  background: linear-gradient(95deg,
-      #ffffff88 8%,
-      #88888888 18%,
-      #ffffff88 33%);
+  background: linear-gradient(
+    95deg,
+    #ffffff88 8%,
+    #88888888 18%,
+    #ffffff88 33%
+  );
   background-size: 200% 200%;
   animation: 0.5s shine linear infinite;
 }
@@ -263,7 +283,7 @@ loading {
   background: red;
 }
 
-.aside>section > button {
+.aside > section > button {
   display: none;
 }
 
@@ -342,8 +362,9 @@ h3 {
 }
 
 .inner-element:has(.vin) {
-  width: calc(100vw - 2.5vmin);
-  height: calc(100vh - 2.5vmin);
+  width: calc(100vw - 1vmin);
+  height: calc(100vh - 1vmin);
+  top: 0;
   justify-content: center;
   align-items: stretch;
   justify-items: stretch;
@@ -355,10 +376,8 @@ h3 {
 }
 
 .inner-element:has(.vin) > iframe {
-  height: 50%;
+  height: 49%;
 }
-
-
 
 iframe {
   background: white;
@@ -367,4 +386,12 @@ iframe {
 .client > img {
   width: 7.5vmin;
   aspect-ratio: 1;
+}
+
+loading#inin{
+  border: 1vmin solid red;
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 25;
 }
