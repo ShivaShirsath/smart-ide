@@ -282,7 +282,7 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
       </form>
       <Editor
         id="editor"
-        height="70%"
+        height="80%"
         width="100%"
         onMount={handleEditorDidMount}
         path={file.name}
