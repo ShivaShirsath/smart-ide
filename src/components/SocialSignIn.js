@@ -17,14 +17,14 @@ const SocialSignIn = () => {
 
   return (
     <main>
-      <pre>{error && error}</pre>
+      {error && <pre>error</pre>}
       <Tilt
         className="tilt"
         perspective={2000}
         glareEnable={true}
         glareMaxOpacity={0.45}
         glareColor="#ffffff"
-        glareBorderRadius="2.5vmin"
+        glareBorderRadius="2.5dvmin"
       >
         <div className="inner-element">
           <h1>Sign In</h1>

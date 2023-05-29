@@ -85,7 +85,7 @@ const Home = () => {
         glareEnable={true}
         glareMaxOpacity={0.45}
         glareColor="#ffffff"
-        glareBorderRadius="2.5vmin"
+        glareBorderRadius="2.5dvmin"
       >
         <div className="inner-element">
           {loading ? (
@@ -94,7 +94,7 @@ const Home = () => {
             <div className="form">
               {error && error}
               <section>
-                <img src="/code-sync.png" alt="logo" />
+                  <img src="/android-chrome-512x512.png" alt="logo" />
               </section>
               <section>
                 <input id="user" value={username} />
@@ -118,12 +118,14 @@ const Home = () => {
                   ╳
                 </button>
                 <button id="new" onClick={createNewRoom}>
-                  ┼
+                    +
                 </button>
               </section>
-              <button id="join" onClick={joinRoom}>
-                Join Room
-              </button>
+                <section>
+                  <button id="join" onClick={joinRoom}>
+                    Join Room
+                  </button>
+                </section>
             </div>
           )}
         </div>

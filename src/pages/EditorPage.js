@@ -89,8 +89,6 @@ const EditorPage = () => {
     }
   }
 
-  function vInput() { }
-
   function leaveRoom() {
     reactNavigator("/");
   }
@@ -105,15 +103,17 @@ const EditorPage = () => {
         tiltEnable={false}
         glarePosition="all"
         glareColor="#ffffff"
-        glareBorderRadius="2.5vmin"
+        glareBorderRadius="2.5dvmin"
       >
         <div className="inner-element">
-          <button className="vin" onClick={vInput}>
+          <button className="vin" style={{
+            display: "none"
+          }}>
             🎙
           </button>
           <div className="aside">
             <section>
-              <img src="/code-sync.png" alt="logo" />
+              <img src="/android-chrome-512x512.png" alt="logo" />
             </section>
             <div className="group">
               <section>

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import ACTIONS from "../Actions";
 import axios from "axios";
+import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 
 const files = {
   "index.html": {
@@ -14,7 +15,7 @@ const files = {
   },
   "style.css": {
     name: "style.css",
-    language: "css",
+    language: "html",
     value: `h1{
   color: gold;
 }
@@ -35,8 +36,15 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
   const file = files[fileName];
   const [user, setUser] = useState(true);
   const [input, setInput] = useState("");
+  const [isInput, setIsInput] = useState("");
   const [response, setResponse] = useState("s");
   const [isLoading, setIsLoading] = useState(false);
+  const { speak, voices } = useSpeechSynthesis();
+  const { listen, listening, stop } = useSpeechRecognition({
+    onResult: (result) => {
+      setInput(result);
+    },
+  });
 
   function validate(code) {
     if (code.includes("#")) {
@@ -120,6 +128,7 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
 
     //onCodeChange(`<style>` + files["style.css"].value + `</style>` + files["index.html"].value + `<scr` + `ipt>` + files["script.js"].value + `</scr` + `ipt>`);
     onCodeChange(editorRef.current.getValue());
+    listen();
   }
 
   function handleEditorChange(value, event) {
@@ -200,78 +209,91 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
       socketRef.current.off(ACTIONS.CODE_CHANGE);
     };
   }, [socketRef.current]);
+  useEffect(() => {
+    if (input.includes("over")) {
+      apiCall();
+    }
+  }, [input]);
 
   const handleInput = (event) => {
     setInput(event.target.value);
   };
 
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const apiCall = async () => {
+    if (input && input !== isInput) {
+      setIsInput(input);
+      setIsLoading(true);
+      const url = "https://api.openai.com/v1/chat/completions";
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_KEYOPENAI}`,
+      };
+      const data = {
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content:
+              input.replace("over", "") +
+              " in html. give code only. without backticks. without using code block. if code block having language then also only code",
+          },
+        ],
+        temperature: 0.7,
+      };
+
+      try {
+        const response = await axios.post(url, data, { headers });
+        setResponse(response.data.choices[0].message.content);
+        editorRef.current.setValue(response.data.choices[0].message.content);
+      } catch (error) {
+        // alert(JSON.stringify(error));
+        console.error(error);
+      }
+
+      setIsLoading(false);
+      setInput("");
+      setIsInput("");
+      document.querySelector("#apiForm").style = "display:none";
+      await delay(2000); // Wait for 30 seconds
+      document.querySelector("#apiForm").style = "display:flex";
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    const url = "https://api.openai.com/v1/chat/completions"; //"https://api.openai.com/v1/engine/davinci-codex/completions";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.REACT_APP_KEYOPENAI}`,
-    };
-    const data = {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content:
-            input +
-            " in html. give code only. without backticks. without using code block. if code block having language then also only code",
-        },
-      ],
-      temperature: 0.7,
-    };
-    axios
-      .post(url, data, { headers })
-      .then((response) => {
-        // alert(JSON.stringify(response.data));
-        setResponse(response.data.choices[0].message.content);
-        // alert(response.data.choices[0].message.content);
-        editorRef.current.setValue(response.data.choices[0].message.content);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        alert(JSON.stringify(error));
-
-        setIsLoading(false);
-      });
+    apiCall();
   };
   return (
     <editor>
-      {/*<div>
-        <button style={{
-          margin: "0 1vmin",
-          background: "gray",
-          padding: "0 1vmin"
-        }} onClick={() => setFileName("index.html")}>
-          HTML
-        </button>
-        <button style={{
-          margin: "0 1vmin",
-          background: "gray",
-          padding: "0 1vmin"
-        }} onClick={() => setFileName("style.css")}>
-          CSS
-        </button>
-        <button style={{
-          margin: "0 1vmin",
-          background: "gray",
-          padding: "0 1vmin"
-        }} onClick={() => setFileName("script.js")}>
-          JS
-        </button>
-      </div>
-      <API/>
-      */}
-
       <loading id="inin" style={{
         display: isLoading ? 'flex' : 'none'
       }}></loading>
       <form id="apiForm" onSubmit={handleSubmit}>
+        {/*  <div>
+          <button style={{
+            margin: "0 1dvmin",
+            background: "gray",
+            padding: "0 1dvmin"
+          }} onClick={() => setFileName("index.html")}>
+            Editor
+          </button>
+           <button style={{
+            margin: "0 1dvmin",
+            background: "gray",
+            padding: "0 1dvmin"
+          }} onClick={() => setFileName("style.css")}>
+            Generated Code
+          </button> */}
+        {/* <button style={{
+            margin: "0 1dvmin",
+            background: "gray",
+            padding: "0 1dvmin"
+          }} onClick={() => setFileName("script.js")}>
+            JS
+          </button>
+        </div> */}
         <input
           type="text"
           id="input"
@@ -279,11 +301,23 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           value={input}
           onChange={handleInput}
         />
+        {/* <button onClick={() => {
+          listen();
+        }}>Hello</button> */}
+        <input type="button" className="vin"
+          onClick={() => {
+            speak({ text: editorRef.current.getValue(), voice: voices[0] });
+          }}
+          onDoubleClick={
+            () => {
+              listen();
+            }
+          }
+          value="🎙">
+        </input>
       </form>
       <Editor
         id="editor"
-        height="80%"
-        width="100%"
         onMount={handleEditorDidMount}
         path={file.name}
         onChange={handleEditorChange}

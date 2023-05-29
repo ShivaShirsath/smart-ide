@@ -25,7 +25,7 @@ const Account = () => {
 					glareMaxOpacity={0.5}
 					glareColor="#ffffff"
 					glarePosition="center"
-					glareBorderRadius="2.5vmin">
+					glareBorderRadius="2.5dvmin">
 					<div className="inner-element">
 						<div>
 							{user && (

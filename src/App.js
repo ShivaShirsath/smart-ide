@@ -10,7 +10,7 @@ import EditorPage from "./pages/EditorPage";
 
 function App() {
   return (
-    <>
+    <AuthContextProvider>
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -19,43 +19,41 @@ function App() {
         tions={{
           icon: "✅",
           style: {
-            borderRadius: "1.5vmin",
+            borderRadius: "1.5dvmin",
             background: "hsla(0, 0%, 0%, 0.5)",
-            backdropFilter: "blur(.25vmin)",
+            backdropFilter: "blur(.25dvmin)",
             color: "#fff",
           },
         }}
       />
-      <AuthContextProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              <ProtectedRoute>
-                <Account />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/editor"
-            element={
-              <ProtectedRoute>
-                <EditorPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </AuthContextProvider>
-    </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editor"
+          element={
+            <ProtectedRoute>
+              <EditorPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </AuthContextProvider>
   );
 }
 

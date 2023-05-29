@@ -37,9 +37,6 @@ dependencies:
   react-speech-kit:
     specifier: ^3.0.1
     version: 3.0.1(prop-types@15.8.1)(react@18.2.0)
-  react-speech-recognition:
-    specifier: ^3.10.0
-    version: 3.10.0(react@18.2.0)
   socket.io:
     specifier: ^4.5.4
     version: 4.5.4
@@ -8911,14 +8908,6 @@ packages:
       react: ^16.8.0
     dependencies:
       prop-types: 15.8.1
-      react: 18.2.0
-    dev: false
-
-  /react-speech-recognition@3.10.0(react@18.2.0):
-    resolution: {integrity: sha512-EVSr4Ik8l9urwdPiK2r0+ADrLyDDrjB0qBRdUWO+w2MfwEBrj6NuRmy1GD3x7BU/V6/hab0pl8Lupen0zwlJyw==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
       react: 18.2.0
     dev: false
 
