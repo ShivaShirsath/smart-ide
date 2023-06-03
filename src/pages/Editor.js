@@ -256,7 +256,7 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
       setInput("");
       setIsInput("");
       document.querySelector("#apiForm").style = "display:none";
-      await delay(2000); // Wait for 30 seconds
+      await delay(2000);
       document.querySelector("#apiForm").style = "display:flex";
     }
   };
@@ -301,19 +301,11 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           value={input}
           onChange={handleInput}
         />
-        {/* <button onClick={() => {
-          listen();
-        }}>Hello</button> */}
         <input type="button" className="vin"
           onClick={() => {
-            speak({ text: editorRef.current.getValue(), voice: voices[0] });
+            speak({ text: editorRef.current.getValue(), voice: voices[12] });
           }}
-          onDoubleClick={
-            () => {
-              listen();
-            }
-          }
-          value="🎙">
+          value="🔊">
         </input>
       </form>
       <Editor

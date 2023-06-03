@@ -437,6 +437,18 @@ loading#inin {
   z-index: 25;
 }
 
+.codicon-folding-collapsed:before {
+  content: "⧖" !important;
+}
+
+.codicon-folding-expanded:before {
+  content: "▿" !important;
+}
+
+.monaco-editor .inline-folded:after {
+  content: "⨝" !important;
+}
+
 @media (orientation: portrait) {
   .inner-element:has(.vin) {
     flex-direction: column;
