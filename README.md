@@ -11,31 +11,31 @@
   <tr>
     <td><center>Architecture</center></td>
     <td>
-      <img src=public/Architecture.svg width=100% height=100%/>
+      <img src=../../blob/Report/Architecture.svg width=100% height=100%/>
     </td>
   </tr>
   <tr>
       <td><center>State Machine</center></td>
     <td>
-      <img src=public/stateMachine.svg width=100% height=100%/>
+      <img src=../../blob/Report/stateMachine.svg width=100% height=100%/>
     </td>
   </tr>
   <tr>
       <td><center>Use Case</center></td>
     <td>
-      <img src=public/useCase.svg width=100% height=100%/>
+      <img src=../../blob/Report/useCase.svg width=100% height=100%/>
     </td>
  </tr>
   <tr>
       <td><center>Data Flow</center></td>
     <td>
-      <img src=public/dataFlow.svg width=100% height=100%/>
+      <img src=../../blob/Report/dataFlow.svg width=100% height=100%/>
     </td>
  </tr>
   <tr>
       <td><center>Class</center></td>
     <td>
-      <img src=public/classDia.jpg width=100% height=100%/>
+      <img src=../../blob/Report/classDia.jpg width=100% height=100%/>
     </td>
   </tr>
 </table>
