@@ -6,7 +6,7 @@
   <a href=https://smart-ide.onrender.com>
     ⋆
   </a>
-
+<hr/>
   <a href=https://ShivaShirsath.githun.io/smart-ide>
     Report
   </a>
