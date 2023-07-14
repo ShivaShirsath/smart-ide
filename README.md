@@ -7,7 +7,7 @@
     ⋆
   </a>
 <hr/>
-  <a href=https://ShivaShirsath.githun.io/smart-ide>
+  <a href=https://ShivaShirsath.github.io/smart-ide>
     Report
   </a>
 </h1>
