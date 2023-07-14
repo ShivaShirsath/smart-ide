@@ -1,0 +1,264 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="785" height="1110" style="background-color:white;">
+  <defs id="canvasGridDefs">
+    <pattern id="smallGrid" width="5" height="5" patternUnits="userSpaceOnUse">
+      <path id="smallGridPath" d="M 5 0 L 0 0 0 5" fill="none" stroke="lightgray" stroke-width="0.5"></path>
+    </pattern>
+    <pattern id="watermarkGrid" width="220" height="80" patternUnits="userSpaceOnUse">
+      <rect id="watermarkGridPath0" x="0" y="0" width="220" height="80" fill="white"></rect>
+      <text x="60" y="55" transform="rotate(-30 90,90)" fill="#eeeeee" font-family="Arial" font-size="16">Flowdia Diagrams </text>
+    </pattern>
+  </defs>
+  <rect id="canvasGrid" width="100%" height="100%" fill="white"></rect>
+  <rect id="shapeSelectGrid" width="0" height="0" x="0" y="0" fill="gray" stroke="gray" fill-opacity="0.2" stroke-width="1"></rect>
+  <circle id="selectionMarker" cx="0" cy="0" r="50" fill="darkslateblue" stroke="darkslateblue" fill-opacity="0.2" stroke-width="0" style="display: none;"></circle>
+  <rect id="process32ee63ab-6f1a-4b5f-a7d4-835de1d28f30" x="60" y="60" height="220" width="120" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="black"></rect>
+  <text id="process32ee63ab-6f1a-4b5f-a7d4-835de1d28f30Text" x="60" y="82.6875" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle" data-text="Login
+‎
+[ Email ]
+[ Password ]
+‎
+----------------------
+‎
+With Google
+‎
+With Facebook 
+‎
+With Github">
+    <tspan x="120" dy="14.21875">Login </tspan>
+    <tspan x="120" dy="14.21875">‎ </tspan>
+    <tspan x="120" dy="14.21875">[ Email ] </tspan>
+    <tspan x="120" dy="14.21875">[ Password ] </tspan>
+    <tspan x="120" dy="14.21875">‎ </tspan>
+    <tspan x="120" dy="14.21875">---------------------- </tspan>
+    <tspan x="120" dy="14.21875">‎ </tspan>
+    <tspan x="120" dy="14.21875">With Google </tspan>
+    <tspan x="120" dy="14.21875">‎ </tspan>
+    <tspan x="120" dy="14.21875">With Facebook </tspan>
+    <tspan x="120" dy="14.21875">‎ </tspan>
+    <tspan x="120" dy="14.21875">With Github </tspan>
+  </text>
+  <rect id="c35ef619-a424-4afa-a3ac-fab650927b3b" x="55" y="55" height="230" width="130" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="process1ac251a6-d7df-481d-8a22-358720ee8cf3" x="480" y="90" height="60" width="180" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="black"></rect>
+  <text id="process1ac251a6-d7df-481d-8a22-358720ee8cf3Text" x="480" y="110.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="570" dy="14.21875">Forebase Authentication </tspan>
+  </text>
+  <rect id="08e211d0-dd21-4608-a04f-e4bb9c175a92" x="475" y="85" height="70" width="190" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <path id="databasef0deb973-dc94-442b-ab97-5e647a36771d" d="M 510 420 M 510 460.8 a 125 40.8  0   0 0  250 0 M 510 460.8 a 125 40.8  0   0 1  250 0 M 510 460.8 l 0 258.4 a 125 40.8  0   0 0  250 0 l 0 -258.4 " fill="white" fill-opacity="1" stroke-opacity="1" stroke="black" fill-rule="nonzero"></path>
+  <text id="databasef0deb973-dc94-442b-ab97-5e647a36771dText" x="510" y="580.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="635" dy="14.21875">Firebase RealTime Database </tspan>
+  </text>
+  <rect id="e0e2f56f-2254-4c20-b063-b9c302350144" x="505" y="415" height="350" width="260" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="alternateProcessafc4da37-967b-41ce-95de-1ce4f302f855" x="195" y="520" height="160" width="140" rx="10" ry="10" fill="white" fill-opacity="1" stroke-opacity="1" stroke="black"></rect>
+  <text id="alternateProcessafc4da37-967b-41ce-95de-1ce4f302f855Text" x="195" y="590.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="265" dy="14.21875">getting group id </tspan>
+  </text>
+  <rect id="446a721a-b4d6-4d38-9b28-0380424ac0a1" x="190" y="515" height="170" width="150" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <polygon id="manualOperationdce25961-d607-4365-8d00-51a932ef67a3" points=" 60,740  360,740  340,1000  80,1000  60,740 " fill="white" fill-opacity="1" stroke-opacity="1" stroke="black" fill-rule="nonzero"></polygon>
+  <text id="manualOperationdce25961-d607-4365-8d00-51a932ef67a3Text" x="60" y="740.03125" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle" data-text="‎
+‎
+‎
+Preview
+‎
+‎
+‎
+
+=======================================
+‎
+Html
+‎
+-------------------------------------------------------
+‎
+Css
+‎
+----------------------------------------
+‎
+JS
+‎">
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">Preview </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875"></tspan>
+    <tspan x="210" dy="14.21875">======================================= </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">Html </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">------------------------------------------------------- </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">Css </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+    <tspan x="210" dy="14.21875">---------------------------------------- </tspan>
+    <tspan x="210" dy="14.21875">‎ </tspan>
+  </text>
+  <rect id="7980e0fb-e26f-44e1-8ad8-9a9f95a6fa15" x="55" y="735" height="270" width="310" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <polygon id="decisionb65fe369-807c-426b-926d-b6c2d49d73b7" points=" 345,350  290,400  345,450  400,400  345,350 " fill="white" fill-opacity="1" stroke-opacity="1" stroke="black" fill-rule="nonzero"></polygon>
+  <text id="decisionb65fe369-807c-426b-926d-b6c2d49d73b7Text" x="290" y="390.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="345" dy="14.21875">group </tspan>
+  </text>
+  <rect id="7eadf065-e042-4524-a029-ccd43cae4865" x="285" y="345" height="110" width="120" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <polygon id="decision252c7a8a-4c25-47a4-ac8d-66321dba1110" points=" 610,240  530,290  610,340  690,290  610,240 " fill="white" fill-opacity="1" stroke-opacity="1" stroke="black" fill-rule="nonzero"></polygon>
+  <text id="decision252c7a8a-4c25-47a4-ac8d-66321dba1110Text" x="530" y="280.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="610" dy="14.21875">mode </tspan>
+  </text>
+  <rect id="9014fd7e-5dec-4cab-9fcc-e6b3e00c87f3" x="525" y="235" height="110" width="170" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <polygon id="decisiona5b6ff8d-4025-43fa-8440-d0825b9c8836" points=" 295,70  240,120  295,170  350,120  295,70 " fill="white" fill-opacity="1" stroke-opacity="1" stroke="black" fill-rule="nonzero"></polygon>
+  <text id="decisiona5b6ff8d-4025-43fa-8440-d0825b9c8836Text" x="240" y="110.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="295" dy="14.21875">is login </tspan>
+  </text>
+  <rect id="9ba04573-2446-4102-95c4-acab59de573f" x="235" y="65" height="110" width="120" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <polygon id="preparation7fdbe4bb-76ec-412f-89ba-e86e18664897" points=" 250,255  270,240  320,240  340,255  320,270  270,270  250,255 " fill="white" fill-opacity="1" stroke-opacity="1" stroke="black" fill-rule="nonzero"></polygon>
+  <text id="preparation7fdbe4bb-76ec-412f-89ba-e86e18664897Text" x="250" y="245.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="295" dy="14.21875">user choice </tspan>
+  </text>
+  <rect id="654ebd97-dc29-4498-9f0d-236a89240572" x="245" y="235" height="40" width="100" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <polyline id="line8a938492-b41b-47b7-8a2a-9228f17c0ccf" points=" 660,120  680,120  680,120  780,120  780,590  780,590  780,590  760,590 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line8a938492-b41b-47b7-8a2a-9228f17c0ccfback" points=" 660,120  680,120  680,120  780,120  780,590  780,590  780,590  760,590 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line8a938492-b41b-47b7-8a2a-9228f17c0ccftextback" x="780" y="110.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line8a938492-b41b-47b7-8a2a-9228f17c0ccftext" x="745" y="110.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="780" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead0196d93d-045f-4e2a-895f-5e25a5abbaae" points=" 770,590  770,585  760,590  770,595  770,590 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line24e347c7-a585-4312-a69f-7346e4ef062d" points=" 610,340  610,360  610,360  610,380  635,380  635,400  635,400  635,420 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line24e347c7-a585-4312-a69f-7346e4ef062dback" points=" 610,340  610,360  610,360  610,380  635,380  635,400  635,400  635,420 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line24e347c7-a585-4312-a69f-7346e4ef062dtextback" x="610" y="370.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line24e347c7-a585-4312-a69f-7346e4ef062dtext" x="560" y="370.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="610" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead60a75bac-b5f6-41a1-91c9-3ba8eb6ad11e" points=" 610,350  605,350  610,340  615,350  610,350 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="linea1ed15d5-f166-44de-b3db-e86ff3be9c0b" points="345,450  345,470  345,470  455,470  455,400  635,400  635,400  635,400  635,420  " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="linea1ed15d5-f166-44de-b3db-e86ff3be9c0bback" points="345,450  345,470  345,470  455,470  455,400  635,400  635,400  635,400  635,420  " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="linea1ed15d5-f166-44de-b3db-e86ff3be9c0btextback" x="455" y="390.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="linea1ed15d5-f166-44de-b3db-e86ff3be9c0btext" x="462.5" y="390.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="455" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead968ffe7a-a06e-4bbb-bafb-ad26b7aa86fb" points=" 345,460  340,460  345,450  350,460  345,460 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line447b8125-73ef-4a7a-8cd8-8d6866550b06" points=" 530,290  510,290  510,290  490,290  490,590  490,590  490,590  510,590 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line447b8125-73ef-4a7a-8cd8-8d6866550b06back" points=" 530,290  510,290  510,290  490,290  490,590  490,590  490,590  510,590 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line447b8125-73ef-4a7a-8cd8-8d6866550b06textback" x="490" y="280.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line447b8125-73ef-4a7a-8cd8-8d6866550b06text" x="425" y="280.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="490" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead95ec908b-0b50-42d6-8b29-6f1f15938b31" points=" 500,590  500,585  510,590  500,595  500,590 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line63f6e66f-c9e6-42b8-ab12-61c59a5add67" points="610,150  610,150  610,150  610,185  610,185  610,220  610,220  610,240" fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line63f6e66f-c9e6-42b8-ab12-61c59a5add67back" points="610,150  610,150  610,150  610,185  610,185  610,220  610,220  610,240" fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line63f6e66f-c9e6-42b8-ab12-61c59a5add67textback" x="610" y="175.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line63f6e66f-c9e6-42b8-ab12-61c59a5add67text" x="545" y="175.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="610" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead09cb6fa5-9435-47c1-9cc4-794fdeef06c4" points=" 610,160  605,160  610,150  615,160  610,160 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line9fc8c7d6-3253-4f2b-9341-7c5dbc25d839" points="290,400  270,400  270,400  267.5,400  267.5,400  290,400  290,500  290,500  290,520  " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line9fc8c7d6-3253-4f2b-9341-7c5dbc25d839back" points="290,400  270,400  270,400  267.5,400  267.5,400  290,400  290,500  290,500  290,520  " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line9fc8c7d6-3253-4f2b-9341-7c5dbc25d839textback" x="267.5" y="390.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line9fc8c7d6-3253-4f2b-9341-7c5dbc25d839text" x="245" y="390.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="267.5" dy="14.21875"></tspan>
+  </text>
+  <polygon id="lineheade2725204-64dc-4551-9dea-79b7fa7b5844" points=" 290,510  285,510  290,520  295,510  290,510 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="lined598af61-4fc8-460b-a01e-ee7a5d19c516" points=" 180,170  200,170  200,170  210,170  210,120  220,120  220,120  240,120 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="lined598af61-4fc8-460b-a01e-ee7a5d19c516back" points=" 180,170  200,170  200,170  210,170  210,120  220,120  220,120  240,120 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="lined598af61-4fc8-460b-a01e-ee7a5d19c516textback" x="210" y="160.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="lined598af61-4fc8-460b-a01e-ee7a5d19c516text" x="185" y="160.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="210" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead64c9f2c3-033b-4a0f-877a-402b0e0f0235" points=" 230,120  230,115  240,120  230,125  230,120 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line1535dd25-8978-4536-8b00-45f092df75b5" points=" 350,120  370,120  370,120  415,120  415,120  460,120  460,120  480,120 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line1535dd25-8978-4536-8b00-45f092df75b5back" points=" 350,120  370,120  370,120  415,120  415,120  460,120  460,120  480,120 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line1535dd25-8978-4536-8b00-45f092df75b5textback" x="415" y="110.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line1535dd25-8978-4536-8b00-45f092df75b5text" x="390" y="110.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="415" dy="14.21875"></tspan>
+  </text>
+  <polygon id="lineheadbc2c1006-6379-4035-a3a4-c791af6bd659" points=" 470,120  470,115  480,120  470,125  470,120 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="lined9af78d6-492f-49e7-aa51-6df5b1d6e879" points="400,400  425,400  425,400  425,400  425,650  450,650  450,650  510,650  " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="lined9af78d6-492f-49e7-aa51-6df5b1d6e879back" points="400,400  425,400  425,400  425,400  425,650  450,650  450,650  510,650  " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="lined9af78d6-492f-49e7-aa51-6df5b1d6e879textback" x="425" y="390.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="lined9af78d6-492f-49e7-aa51-6df5b1d6e879text" x="410" y="390.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="425" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead5065e5d7-c4f8-4532-a18b-39e83e499f77" points=" 500,650  500,645  510,650  500,655  500,650 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="linec053570c-319c-4817-9df6-523476924e84" points=" 295,170  295,190  295,190  295,205  295,205  295,220  295,220  295,240 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="linec053570c-319c-4817-9df6-523476924e84back" points=" 295,170  295,190  295,190  295,205  295,205  295,220  295,220  295,240 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="linec053570c-319c-4817-9df6-523476924e84textback" x="295" y="195.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="linec053570c-319c-4817-9df6-523476924e84text" x="270" y="195.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="295" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead95e042bc-d1fd-4b2e-9b84-f0d2ca4f5bb1" points=" 295,230  290,230  295,240  300,230  295,230 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="linec043b91a-3b8a-4088-aa59-439cda3447f9" points="290,400  270,400  270,400  240,400  240,400  115,400  115,720  115,720  115,740  " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="linec043b91a-3b8a-4088-aa59-439cda3447f9back" points="290,400  270,400  270,400  240,400  240,400  115,400  115,720  115,720  115,740  " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="linec043b91a-3b8a-4088-aa59-439cda3447f9textback" x="240" y="390.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="linec043b91a-3b8a-4088-aa59-439cda3447f9text" x="215" y="390.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="240" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead5bd0e8b1-f7cf-4da0-8af5-367833bc3d7b" points=" 115,730  110,730  115,740  120,730  115,730 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line19739824-7866-4031-92f8-149998af7448" points=" 295,270  295,290  295,290  295,310  345,310  345,330  345,330  345,350 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line19739824-7866-4031-92f8-149998af7448back" points=" 295,270  295,290  295,290  295,310  345,310  345,330  345,330  345,350 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line19739824-7866-4031-92f8-149998af7448textback" x="295" y="300.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line19739824-7866-4031-92f8-149998af7448text" x="270" y="300.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="295" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead3a5fbc11-6e90-4a0d-8582-eacfaeca7c65" points=" 345,340  340,340  345,350  350,340  345,340 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line4fb4e67c-e267-4a20-9896-1ae5f9749105" points="525,150  525,170  525,170  525,212.5  525,212.5  525,255  360,255  360,255  340,255" fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line4fb4e67c-e267-4a20-9896-1ae5f9749105back" points="525,150  525,170  525,170  525,212.5  525,212.5  525,255  360,255  360,255  340,255" fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line4fb4e67c-e267-4a20-9896-1ae5f9749105textback" x="525" y="203.390625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line4fb4e67c-e267-4a20-9896-1ae5f9749105text" x="545" y="203.390625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="525" dy="14.21875"></tspan>
+  </text>
+  <polygon id="lineheadb8ca7e80-9a2a-4cee-98b3-4b833b7d9cdb" points=" 350,255  350,250  340,255  350,260  350,255 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line98aa6b85-60a3-4cb3-b1f9-dc9060128b01" points=" 570,90  570,70  570,70  570,40  120,40  120,40  120,40  120,60 " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line98aa6b85-60a3-4cb3-b1f9-dc9060128b01back" points=" 570,90  570,70  570,70  570,40  120,40  120,40  120,40  120,60 " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line98aa6b85-60a3-4cb3-b1f9-dc9060128b01textback" x="570" y="30.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line98aa6b85-60a3-4cb3-b1f9-dc9060128b01text" x="545" y="30.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="570" dy="14.21875"></tspan>
+  </text>
+  <polygon id="lineheadabdc87f4-1e2e-44ff-9470-153660377834" points=" 120,50  115,50  120,60  125,50  120,50 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <polyline id="line7afc840d-6fa7-42fd-bed7-5504a4e19cfa" points="265,680  265,700  265,700  265,705  210,705  210,720  210,720  210,740  " fill="none" stroke="black" stroke-width="1"></polyline>
+  <polyline id="line7afc840d-6fa7-42fd-bed7-5504a4e19cfaback" points="265,680  265,700  265,700  265,705  210,705  210,720  210,720  210,740  " fill="none" stroke="gray" stroke-width="15" opacity="0"></polyline>
+  <rect id="line7afc840d-6fa7-42fd-bed7-5504a4e19cfatextback" x="265" y="695.890625" height="1" width="0" fill="none" stroke-width="0"></rect>
+  <text id="line7afc840d-6fa7-42fd-bed7-5504a4e19cfatext" x="240" y="695.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="265" dy="14.21875"></tspan>
+  </text>
+  <polygon id="linehead818fd81d-f65d-47a5-bf32-60ebf7029134" points=" 210,730  205,730  210,740  215,730  210,730 " fill="black" stroke="black" fill-rule="nonzero"></polygon>
+  <rect id="textonly8ace05c8-5a9a-422e-8dfc-10cca8651a13" x="230" y="20" height="10" width="130" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonly8ace05c8-5a9a-422e-8dfc-10cca8651a13Text" x="230" y="15.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="295" dy="14.21875">Sign out </tspan>
+  </text>
+  <rect id="dbfc5b22-38b1-42dd-9fcb-3f8f915a20ff" x="225" y="15" height="20" width="140" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="textonlyf9651468-6366-4a27-812c-8565949a2674" x="460" y="890" height="70" width="100" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonlyf9651468-6366-4a27-812c-8565949a2674Text" x="460" y="915.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="510" dy="14.21875"></tspan>
+  </text>
+  <rect id="a830911e-7347-4092-ad77-1d5a49a9f42f" x="455" y="885" height="80" width="110" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="textonly13204402-4cff-4232-b853-ed957ea38362" x="360" y="80" height="40" width="100" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonly13204402-4cff-4232-b853-ed957ea38362Text" x="360" y="90.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="410" dy="14.21875">if not login </tspan>
+  </text>
+  <rect id="2f3d1501-650c-41fe-9093-02237259cd9f" x="355" y="75" height="50" width="110" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="textonly7dc3d9b1-0a9f-4522-a816-270654b21ccb" x="110" y="360" height="30" width="130" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonly7dc3d9b1-0a9f-4522-a816-270654b21ccbText" x="110" y="365.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="175" dy="14.21875">Single Purpose </tspan>
+  </text>
+  <rect id="fd9d2896-cfaf-4059-b51b-f359eb73f699" x="105" y="355" height="40" width="140" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="textonly499e496d-7e63-4eb2-abc1-fac30823a9d3" x="630" y="340" height="30" width="70" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonly499e496d-7e63-4eb2-abc1-fac30823a9d3Text" x="630" y="345.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="665" dy="14.21875">Output </tspan>
+  </text>
+  <rect id="d5909075-9025-4d78-b8a0-9ec630ce5c57" x="625" y="335" height="40" width="80" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="textonly0980e189-bc70-4898-a48d-5b64c75aa12e" x="430" y="540" height="80" width="50" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonly0980e189-bc70-4898-a48d-5b64c75aa12eText" x="430" y="570.890625" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="455" dy="14.21875">Input </tspan>
+  </text>
+  <rect id="1476b5d6-e398-4283-8ddf-3efce067ba1c" x="425" y="535" height="90" width="60" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="textonlydb8ff744-fd50-4102-bee7-9e3d51211c2f" x="665" y="130" height="60" width="95" rx="0" ry="0" fill="white" fill-opacity="1" stroke-opacity="1" stroke="transparent"></rect>
+  <text id="textonlydb8ff744-fd50-4102-bee7-9e3d51211c2fText" x="665" y="143.78125" fill="black" font-size="12" font-family="Arial" font-weight="normal" text-anchor="middle">
+    <tspan x="712.5" dy="14.21875">Authentication </tspan>
+    <tspan x="712.5" dy="14.21875">Data </tspan>
+  </text>
+  <rect id="20ba4dec-80ee-4057-a0c0-24c95f2b38f6" x="660" y="125" height="70" width="105" stroke-width="1" stroke-dasharray="3,1" fill="none" stroke="none"></rect>
+  <rect id="line447b8125-73ef-4a7a-8cd8-8d6866550b066rectjog" x="485" y="395" width="10" height="10" fill="white" stroke-width="0"></rect>
+  <line id="line447b8125-73ef-4a7a-8cd8-8d6866550b066linejog" x1="490" y1="395" x2="490" y2="405" stroke-width="1" stroke="black"></line>
+  <path id="line447b8125-73ef-4a7a-8cd8-8d6866550b066pathjog" d="M485 400 q 5 -7.5 10 0" stroke="black" stroke-width="1" fill="none"></path>
+  <rect id="lined9af78d6-492f-49e7-aa51-6df5b1d6e87910rectjog" x="420" y="465" width="10" height="10" fill="white" stroke-width="0"></rect>
+  <line id="lined9af78d6-492f-49e7-aa51-6df5b1d6e87910linejog" x1="425" y1="465" x2="425" y2="475" stroke-width="1" stroke="black"></line>
+  <path id="lined9af78d6-492f-49e7-aa51-6df5b1d6e87910pathjog" d="M420 470 q 5 -7.5 10 0" stroke="black" stroke-width="1" fill="none"></path>
+</svg>
