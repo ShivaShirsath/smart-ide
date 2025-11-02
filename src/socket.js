@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 export const initSocket = async () => {
-  return io("https://smart-ide.up.railway.app", {
+  return io("http://127.0.0.1:1337", {
     "force new connection": true,
     reconnectionAttempt: "Infinity",
     timeout: 10000,
