@@ -6,10 +6,17 @@ const ACTIONS = require("./src/Actions");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // We'll allow all for now, but you should restrict this to your Vercel URL later
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
+// For local builds
 app.use(express.static("build"));
-app.use((req, res, next) => {
+app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
