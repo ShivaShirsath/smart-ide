@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { UserAuth } from "../context/AuthContext";
 import Tilt from "react-parallax-tilt";
+import IcGoogle from "../assets/IcGoogle";
+import IcGithub from "../assets/IcGithub";
 
 const SocialSignIn = () => {
   const { signInWith } = UserAuth();
@@ -29,17 +31,25 @@ const SocialSignIn = () => {
         <div className="inner-element">
           <h1>Sign In</h1>
           <section>
-            <img
+            <IcGoogle
               id="google"
-              src="https://upload.wikimedia.org/wikipedia/commons/archive/5/53/20200429221626%21Google_%22G%22_Logo.svg"
               onClick={signIn}
               alt="google"
+              style={{
+                cursor: 'pointer',
+                width: '100%',
+                height: '100%',
+              }}
             />
-            <img
+            <IcGithub
               id="github"
-              src="https://upload.wikimedia.org/wikipedia/commons/9/95/Font_Awesome_5_brands_github.svg"
               onClick={signIn}
               alt="github"
+              style={{
+                cursor: 'pointer',
+                width: '100%',
+                height: '100%',
+              }}
             />
           </section>
         </div>
