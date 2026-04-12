@@ -7,6 +7,6 @@ export const initSocket = async () => {
     timeout: 10000,
     transports: ["websocket"],
   };
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:1337";
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "https://smart-ide.onrender.com" || "http://localhost:1337";
   return io(backendUrl, options);
 };
