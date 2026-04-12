@@ -11,7 +11,9 @@ const SocialSignIn = () => {
   const signIn = async (e) => {
     setError("");
     try {
-      await signInWith(e.target.id === "google");
+      // Use currentTarget to ensure we get the ID of the button/icon 
+      // even if a specific path inside the SVG was clicked
+      await signInWith(e.currentTarget.id === "google");
     } catch (e) {
       setError(JSON.stringify(e, undefined, 2));
     }
