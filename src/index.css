@@ -517,8 +517,15 @@ div#inin {
 }
 
 @keyframes chatFadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .chat-msg.user {
@@ -576,7 +583,7 @@ editor {
 }
 
 .ai-sidebar.open {
-  width: 350px;
+  width: 550px;
   opacity: 1;
 }
 
@@ -677,7 +684,7 @@ editor {
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: bold;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
 }
 
@@ -706,4 +713,81 @@ editor {
   flex-grow: 1;
   background: transparent;
   border: none;
+}
+
+.chat-code-block {
+  margin: 1.5dvmin 0;
+  border-radius: 1.2dvmin;
+  overflow: hidden;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  background: #1e1e1e;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  min-height: 150px;
+}
+
+.chat-code-block.diff {
+  min-height: 300px;
+  border: 1px solid rgba(80, 250, 123, 0.3);
+}
+
+.chat-msg {
+  padding: 1.2dvmin 1.5dvmin;
+  margin: 0.8dvmin 0;
+  border-radius: 1.2dvmin;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+  width: 100%;
+  animation: chatFadeIn 0.3s ease-out;
+}
+
+@keyframes chatFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-msg.model {
+  background: rgba(45, 45, 45, 0.8);
+  border-left: 4px solid #50fa7b;
+  color: #f8f8f2;
+}
+
+.chat-msg.user {
+  background: rgba(255, 215, 0, 0.1);
+  border-right: 4px solid gold;
+  color: #fff;
+  align-self: flex-end;
+}
+.retry-btn {
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid gold;
+  color: gold;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.retry-btn:hover {
+  background: gold;
+  color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+}
+
+.retry-btn:active {
+  transform: translateY(0);
 }

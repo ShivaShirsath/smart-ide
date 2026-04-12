@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import Editor from "@monaco-editor/react";
+import Editor, { DiffEditor } from "@monaco-editor/react";
 import ACTIONS from "../Actions";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -26,6 +26,59 @@ const files = {
     language: "javascript",
     value: `document.body.bgColor="black";`,
   },
+};
+
+const MonacoCodeBlock = ({ code, language, originalCode }) => {
+  const cleanCode = (code || "").trim();
+  const cleanOriginal = (originalCode || "").trim();
+  const isDifferent = cleanOriginal && cleanCode && cleanOriginal !== cleanCode;
+
+  if (isDifferent) {
+    return (
+      <div className="chat-code-block diff">
+        <DiffEditor
+          height="300px"
+          original={cleanOriginal}
+          modified={cleanCode}
+          language={language || "html"}
+          theme="vs-dark"
+          options={{
+            readOnly: true,
+            minimap: { enabled: false },
+            scrollBeyondLastLine: false,
+            fontSize: 14,
+            renderSideBySide: true,
+            automaticLayout: true,
+            useInlineViewWhenSpaceIsLimited: false,
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="chat-code-block">
+      <Editor
+        height="250px"
+        width="350px"
+        language={language || "html"}
+        theme="vs-dark"
+        value={cleanCode}
+        options={{
+          readOnly: true,
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          fontSize: 14,
+          lineNumbers: "off",
+          folding: false,
+          renderLineHighlight: "none",
+          wordWrap: "on",
+          domReadOnly: true,
+          automaticLayout: true,
+        }}
+      />
+    </div>
+  );
 };
 
 const Editors = ({ socketRef, roomId, onCodeChange }) => {
@@ -118,16 +171,16 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
 
   function handleEditorChange(value, event) {
     if (editorRef.current) {
-        onCodeChange(editorRef.current.getValue());
+      onCodeChange(editorRef.current.getValue());
 
-        if (user) {
+      if (user) {
         socketRef.current.emit(ACTIONS.CODE_CHANGE, {
-            roomId,
-            code: value,
-            pos: editorRef.current.getPosition(),
+          roomId,
+          code: value,
+          pos: editorRef.current.getPosition(),
         });
-        }
-        if (!user) setUser(true);
+      }
+      if (!user) setUser(true);
     }
   }
 
@@ -138,8 +191,9 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
   }, [file.value, onCodeChange]);
 
   useEffect(() => {
-    if (socketRef.current) {
-      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code, pos }) => {
+    const socket = socketRef.current;
+    if (socket) {
+      socket.on(ACTIONS.CODE_CHANGE, ({ code, pos }) => {
         if (code !== null && editorRef.current) {
           editorRef.current.setValue(code);
           if (pos) {
@@ -151,14 +205,21 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
     }
 
     return () => {
-      if (socketRef.current) {
-        socketRef.current.off(ACTIONS.CODE_CHANGE);
+      if (socket) {
+        socket.off(ACTIONS.CODE_CHANGE);
       }
     };
-  }, [socketRef.current]);
+  }, [socketRef]);
+
+  // Force layout update when sidebar state changes (Stability Fix)
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.layout();
+    }
+  }, [isSidebarOpen]);
 
   useEffect(() => {
-    if (input.includes("over")) {
+    if (input.endsWith(" over")) {
       apiCall();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,17 +235,36 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
     setInput(event.target.value);
   };
 
-  const apiCall = async () => {
-    if (input && input !== isInput) {
-      setIsInput(input);
+  const apiCall = async (retryInput = null) => {
+    const currentInput = retryInput || input;
+    if (currentInput && (retryInput || currentInput !== isInput)) {
+      if (!retryInput) setIsInput(currentInput);
       setIsGenerating(true);
       setPartialResponse("");
 
+      if (retryInput) {
+        setChatHistory(prev => prev.slice(0, -1)); // Remove the error message bubble
+      }
+
+      // Check for offline status before attempting API call
+      if (!navigator.onLine) {
+        setChatHistory(prev => [
+          ...prev,
+          ...(retryInput ? [] : [{ role: "user", content: currentInput }]),
+          { role: "model", content: "🌐 Internet connection issue. Please check your network and try again.", isError: true, lastPrompt: currentInput }
+        ]);
+        setIsGenerating(false);
+        return;
+      }
+
+      // Capture current editor content for Diff View at the START of the call
+      const capturedOriginalCode = editorRef.current ? editorRef.current.getValue() : "";
+
       const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
       if (!apiKey) {
-        setChatHistory(prev => [...prev, 
-          { role: "user", content: input },
-          { role: "model", content: "⚠️ API Key not found. Please set REACT_APP_GEMINI_API_KEY in your .env file." }
+        setChatHistory(prev => [...prev,
+        ...(retryInput ? [] : [{ role: "user", content: currentInput }]),
+        { role: "model", content: "⚠️ API Key not found. Please set REACT_APP_GEMINI_API_KEY in your .env file.", isError: true, lastPrompt: currentInput }
         ]);
         setIsGenerating(false);
         return;
@@ -206,9 +286,9 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           },
         });
 
-        const prompt = input.replace("over", "") + " in html. give code only. without backticks. without using code block. if code block having language then also only code";
+        const prompt = currentInput.replace("over", "") + " in html, Provide a detailed explanation in one sentence, followed by the code snippet. IMPORTANT: Wrap the code snippet in a markdown code block (triple backticks)., and last one liner output";
         const result = await chat.sendMessageStream(prompt);
-        
+
         let fullText = "";
         for await (const chunk of result.stream) {
           const chunkText = chunk.text();
@@ -216,31 +296,36 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           setPartialResponse(fullText);
         }
 
-        let cleanCode = fullText;
-        if (fullText.includes("```")) {
-          const match = fullText.match(/```(?:[a-zA-Z]+)?\n([\s\S]*?)\n```/);
-          if (match && match[1]) {
-            cleanCode = match[1];
-          } else {
-            cleanCode = fullText.replace(/```/g, "");
-          }
+        // Improved extraction: Find the first code block to sync with the main editor
+        let syncCode = "";
+        const codeBlockRegex = /```(?:[a-zA-Z]+)?\n([\s\S]*?)```/g;
+        const matches = [...fullText.matchAll(codeBlockRegex)];
+
+        if (matches.length > 0) {
+          syncCode = matches[0][1];
+        } else {
+          // Fallback for simple responses
+          syncCode = fullText.replace(/```/g, "").trim();
         }
 
         setChatHistory(prev => [
           ...prev,
-          { role: "user", content: input },
-          { role: "model", content: fullText }
+          ...(retryInput ? [] : [{ role: "user", content: currentInput }]),
+          { role: "model", content: fullText, originalCode: capturedOriginalCode }
         ]);
 
-        if (editorRef.current) {
-            editorRef.current.setValue(cleanCode.trim());
+        if (editorRef.current && syncCode) {
+          editorRef.current.setValue(syncCode.trim());
         }
       } catch (error) {
         console.error("Gemini API Error:", error);
         let errorMessage = error.message;
-        
-        // Handle Rate Limit (429) gracefully
-        if (errorMessage.includes("429") || errorMessage.toLowerCase().includes("quota exceeded")) {
+
+        // User-friendly network/offline error handling
+        if (errorMessage.includes("Load failed") || errorMessage.includes("Failed to fetch") || !navigator.onLine) {
+          errorMessage = "🌐 Connection lost. Please check your internet and try again.";
+        } else if (errorMessage.includes("429") || errorMessage.toLowerCase().includes("quota exceeded")) {
+          // Handle Rate Limit (429) gracefully
           const retryMatch = errorMessage.match(/retry in ([\d.]+)s/);
           const retryTime = retryMatch ? `in ${Math.ceil(parseFloat(retryMatch[1]))} seconds` : "soon";
           errorMessage = `⚠️ AI is currently busy (Rate limit reached). Please try again ${retryTime}.`;
@@ -250,16 +335,58 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
 
         setChatHistory(prev => [
           ...prev,
-          { role: "user", content: input },
-          { role: "model", content: errorMessage }
+          ...(retryInput ? [] : [{ role: "user", content: currentInput }]),
+          { role: "model", content: errorMessage, isError: true, lastPrompt: currentInput }
         ]);
       }
 
       setIsGenerating(false);
       setPartialResponse("");
       setInput("");
-      setIsInput("");
+      if (!retryInput) setIsInput("");
     }
+  };
+
+  const renderMessageContent = (msg, isLast = false) => {
+    const { content, originalCode, isError, lastPrompt } = msg;
+    if (!content) return null;
+
+    // Split content by triple-backtick blocks
+    const parts = content.split(/(```[\s\S]*?```)/g);
+
+    return (
+      <>
+        {parts.map((part, index) => {
+          if (part.startsWith("```")) {
+            // Extract language and code
+            const match = part.match(/```(?:([a-zA-Z]+)?\n)?([\s\S]*?)```/);
+            const language = match ? (match[1] || "javascript") : "javascript";
+            const code = match ? match[2] : part;
+
+            return (
+              <MonacoCodeBlock
+                key={index}
+                code={code.trim()}
+                language={language.toLowerCase() === 'html' ? 'html' : language}
+                originalCode={originalCode}
+              />
+            );
+          } else {
+            // Regular text explanation
+            return <div key={index} className="chat-text-part">{part}</div>;
+          }
+        })}
+        {isError && isLast && (
+          <button
+            className="retry-btn"
+            onClick={() => apiCall(lastPrompt)}
+            title="Retry this request"
+          >
+            🔄 Retry
+          </button>
+        )}
+      </>
+    );
   };
 
   const handleSubmit = (event) => {
@@ -290,18 +417,18 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           <h3>AI Assistant</h3>
           <button className="close-sidebar" onClick={() => setIsSidebarOpen(false)}>×</button>
         </div>
-        
+
         <div className="sidebar-chat-content">
           {(chatHistory.length > 0 || isGenerating) && (
             <div className="chat-history">
               {chatHistory.map((msg, index) => (
                 <div key={index} className={`chat-msg ${msg.role}`}>
-                  {msg.content}
+                  {renderMessageContent(msg, index === chatHistory.length - 1)}
                 </div>
               ))}
               {isGenerating && (
                 <div className="chat-msg model">
-                  {partialResponse || "Thinking..."}
+                  {renderMessageContent({ content: partialResponse }, false) || "Thinking..."}
                 </div>
               )}
               <div ref={chatEndRef} />
@@ -321,7 +448,7 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
             <input type="button" className="voice-btn"
               onClick={() => {
                 if (editorRef.current) {
-                    speak({ text: editorRef.current.getValue(), voice: voices[12] });
+                  speak({ text: editorRef.current.getValue(), voice: voices[12] });
                 }
               }}
               value="🔊">
