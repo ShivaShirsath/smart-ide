@@ -676,21 +676,25 @@ editor {
   top: 1.5dvmin;
   right: 1.5dvmin;
   z-index: 101;
-  background: rgba(255, 215, 0, 0.9);
+  background: rgba(255, 215, 0, 0);
   color: #000;
   border: none;
-  padding: 0.6dvmin 1.2dvmin;
+  padding: 0;
   border-radius: 0.5dvmin;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1.85rem;
   font-weight: bold;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
 }
 
 .sidebar-toggle:hover {
   transform: scale(1.05);
-  background: gold;
+}
+
+.invisible {
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
 
 .close-sidebar {
@@ -766,6 +770,7 @@ editor {
   color: #fff;
   align-self: flex-end;
 }
+
 .retry-btn {
   margin-top: 10px;
   background: transparent;
@@ -790,4 +795,49 @@ editor {
 
 .retry-btn:active {
   transform: translateY(0);
+}
+
+/* Thinking Animation (Bouncing Dots) */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 0;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: gold;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.3s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Stop Button Styles */
+.chat-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
 }

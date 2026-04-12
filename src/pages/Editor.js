@@ -31,7 +31,13 @@ const files = {
 const MonacoCodeBlock = ({ code, language, originalCode }) => {
   const cleanCode = (code || "").trim();
   const cleanOriginal = (originalCode || "").trim();
-  const isDifferent = cleanOriginal && cleanCode && cleanOriginal !== cleanCode;
+  
+  // Robust diff detection: only show diff if we have both versions AND they are actually different
+  // and have reasonable content lengths to avoid "no diff result" errors.
+  const isDifferent = cleanOriginal && 
+                      cleanCode && 
+                      cleanOriginal !== cleanCode && 
+                      cleanCode.length > 5;
 
   if (isDifferent) {
     return (
@@ -90,6 +96,7 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
   const [input, setInput] = useState("");
   const [isInput, setIsInput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const isGeneratingRef = useRef(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [partialResponse, setPartialResponse] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
@@ -214,13 +221,23 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
   // Force layout update when sidebar state changes (Stability Fix)
   useEffect(() => {
     if (editorRef.current) {
-      editorRef.current.layout();
+      setTimeout(() => {
+        editorRef.current.layout();
+      }, 200);
     }
   }, [isSidebarOpen]);
 
   useEffect(() => {
-    if (input.endsWith(" over")) {
-      apiCall();
+    const lowerInput = input.toLowerCase();
+    if (lowerInput.endsWith(" over")) {
+      const cleanInput = input.slice(0, -5).trim();
+      // 1. Clear input immediately to stop any re-renders from re-triggering this
+      setInput(""); 
+      
+      // 2. Only proceed if we have content and aren't already generating
+      if (cleanInput && !isGeneratingRef.current) {
+        apiCall(cleanInput, false);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
@@ -235,15 +252,22 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
     setInput(event.target.value);
   };
 
-  const apiCall = async (retryInput = null) => {
-    const currentInput = retryInput || input;
-    if (currentInput && (retryInput || currentInput !== isInput)) {
+  const apiCall = async (retryInput = null, isRetry = false) => {
+    const currentInput = (retryInput || input || "").trim().replace(/\s+over$/i, "");
+
+    // Strict guard against empty input or concurrent generation
+    if (!currentInput || isGeneratingRef.current) return;
+
+    if (retryInput || currentInput !== isInput) {
       if (!retryInput) setIsInput(currentInput);
       setIsGenerating(true);
+      isGeneratingRef.current = true;
       setPartialResponse("");
 
-      if (retryInput) {
-        setChatHistory(prev => prev.slice(0, -1)); // Remove the error message bubble
+      if (isRetry) {
+        // If it's a retry of an error, remove the last error bubble
+        // but ensure we leave the user's prompt as the first message.
+        setChatHistory(prev => (prev.length > 0 ? prev.slice(0, -1) : prev));
       }
 
       // Check for offline status before attempting API call
@@ -257,8 +281,11 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
         return;
       }
 
-      // Capture current editor content for Diff View at the START of the call
+      // Immediately show user message in chat history if it's NOT a retry
       const capturedOriginalCode = editorRef.current ? editorRef.current.getValue() : "";
+      if (!isRetry) {
+        setChatHistory(prev => [...prev, { role: "user", content: currentInput }]);
+      }
 
       const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
       if (!apiKey) {
@@ -274,10 +301,25 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
       const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" });
 
       try {
-        const history = chatHistory.map(msg => ({
-          role: msg.role === "user" ? "user" : "model",
-          parts: [{ text: msg.content }],
-        }));
+        // Strict role validation for Gemini: History MUST alternate User -> Model and MUST start with User.
+        const history = [];
+        chatHistory.forEach((msg, idx) => {
+          const role = msg.role === "user" ? "user" : "model";
+          // Only add if it's not the last model error (which we are currently retrying/replacing)
+          // and ensure alternation.
+          if (history.length === 0 && role !== "user") return; // Skip if first is not user
+          if (history.length > 0 && history[history.length - 1].role === role) return; // Skip if same consecutive role
+          
+          history.push({
+            role: role,
+            parts: [{ text: msg.content }],
+          });
+        });
+
+        // If this is a NEW command (not a retry), add the current prompt now
+        if (!isRetry) {
+           history.push({ role: "user", parts: [{ text: currentInput }] });
+        }
 
         const chat = model.startChat({
           history: history,
@@ -286,7 +328,11 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           },
         });
 
-        const prompt = currentInput.replace("over", "") + " in html, Provide a detailed explanation in one sentence, followed by the code snippet. IMPORTANT: Wrap the code snippet in a markdown code block (triple backticks)., and last one liner output";
+        const prompt = currentInput.replace("over", "").trim() + `. the code should be in html,
+        INSTRUCTIONS:
+        1. If the user is asking for a code change, feature, or technical help: Provide a clear explanation in one sentence, followed by the code snippet in a markdown code block (triple backticks).
+        2. If the user is just saying hello, thank you, or casual chat: Respond conversationally WITHOUT any code block. Do NOT force a code block if it is not requested.
+        3. Always include a one-liner helpful output at the very end.`;
         const result = await chat.sendMessageStream(prompt);
 
         let fullText = "";
@@ -304,13 +350,12 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
         if (matches.length > 0) {
           syncCode = matches[0][1];
         } else {
-          // Fallback for simple responses
-          syncCode = fullText.replace(/```/g, "").trim();
+          // No code block found - do not fallback to full text for conversational messages
+          syncCode = "";
         }
 
         setChatHistory(prev => [
           ...prev,
-          ...(retryInput ? [] : [{ role: "user", content: currentInput }]),
           { role: "model", content: fullText, originalCode: capturedOriginalCode }
         ]);
 
@@ -335,12 +380,12 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
 
         setChatHistory(prev => [
           ...prev,
-          ...(retryInput ? [] : [{ role: "user", content: currentInput }]),
           { role: "model", content: errorMessage, isError: true, lastPrompt: currentInput }
         ]);
       }
 
       setIsGenerating(false);
+      isGeneratingRef.current = false;
       setPartialResponse("");
       setInput("");
       if (!retryInput) setIsInput("");
@@ -379,7 +424,7 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
         {isError && isLast && (
           <button
             className="retry-btn"
-            onClick={() => apiCall(lastPrompt)}
+            onClick={() => apiCall(lastPrompt, true)}
             title="Retry this request"
           >
             🔄 Retry
@@ -407,8 +452,8 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
           roundedSelection={true}
           scrollBeyondLastLine={false}
         />
-        <button className="sidebar-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-          {isSidebarOpen ? "→" : "←"} AI Chat
+        <button className={`sidebar-toggle ${isSidebarOpen ? "invisible" : ""}`} onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          💬
         </button>
       </div>
 
@@ -428,7 +473,11 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
               ))}
               {isGenerating && (
                 <div className="chat-msg model">
-                  {renderMessageContent({ content: partialResponse }, false) || "Thinking..."}
+                  {renderMessageContent({ content: partialResponse }, false) || (
+                    <div className="typing-indicator">
+                      <span></span><span></span><span></span>
+                    </div>
+                  )}
                 </div>
               )}
               <div ref={chatEndRef} />
@@ -438,13 +487,17 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
 
         <form className="sidebar-form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <input
-              type="text"
-              id="input"
-              placeholder="Ask anything..."
-              value={input}
-              onChange={handleInput}
-            />
+            <div className="chat-input-container" style={{ flexGrow: 1, position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <input
+                type="text"
+                id="input"
+                placeholder="Ask anything..."
+                value={input}
+                onChange={handleInput}
+                autoComplete="off"
+                style={{ width: '100%' }}
+              />
+            </div>
             <input type="button" className="voice-btn"
               onClick={() => {
                 if (editorRef.current) {
@@ -453,10 +506,10 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
               }}
               value="🔊">
             </input>
+            <button type="submit" className="send-btn" disabled={isGenerating}>
+              {isGenerating ? "..." : "Send"}
+            </button>
           </div>
-          <button type="submit" className="send-btn" disabled={isGenerating}>
-            {isGenerating ? "..." : "Send"}
-          </button>
         </form>
       </div>
     </editor>
