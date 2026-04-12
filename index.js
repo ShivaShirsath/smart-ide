@@ -18,10 +18,11 @@ function getAllConnectedClients(roomId) {
 	// Map
 	return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map(
 		(socketId) => {
+			const userData = userSocketMap[socketId];
 			return {
 				socketId,
-				username: userSocketMap[socketId].username,
-				photo: userSocketMap[socketId].photo,
+				username: userData ? userData.username : "Guest",
+				photo: userData ? userData.photo : "",
 			};
 		},
 	);
@@ -63,11 +64,14 @@ io.on(ACTIONS.CONNECTION, (socket) => {
 	socket.on(ACTIONS.DISCONNECTING, () => {
 		const rooms = [...socket.rooms];
 		rooms.forEach((roomId) => {
-			socket.in(roomId).emit(ACTIONS.DISCONNECTED, {
-				socketId: socket.id,
-				username: userSocketMap[socket.id].username,
-				photo: userSocketMap[socket.id].photo,
-			});
+			const userData = userSocketMap[socket.id];
+			if (userData) {
+				socket.in(roomId).emit(ACTIONS.DISCONNECTED, {
+					socketId: socket.id,
+					username: userData.username,
+					photo: userData.photo,
+				});
+			}
 		});
 		delete userSocketMap[socket.id];
 		socket.leave();

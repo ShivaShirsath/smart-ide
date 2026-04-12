@@ -15,26 +15,23 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(false);
     if (!user) {
+      setLoading(false);
       setUsername("Wait...");
-    } else {
-      try {
-        if (!user.displayName)
-          if (!user.providerData.displayName)
-            if (!user.email) setUsername("UserName");
-            else
-              setUsername(
-                user.email
-                  .replace("@gmail.com", "")
-                  .replace(/[0-9]/g, "")
-                  .replace(".", " ")
-              );
-          else setUsername(user.providerData.displayName);
-        else setUsername(user.displayName);
-      } catch (e) {
-        setLoading(true);
-      }
+      return;
+    }
+
+    try {
+      const extractedName = user.displayName || 
+                          (user.providerData && user.providerData[0] && user.providerData[0].displayName) || 
+                          (user.email ? user.email.split('@')[0].replace(/[0-9]/g, "").replace(".", " ") : "User");
+      
+      setUsername(extractedName);
+      setLoading(false);
+    } catch (e) {
+      console.error("Error extracting username:", e);
+      setUsername("User");
+      setLoading(false);
     }
   }, [user]);
 
@@ -89,7 +86,7 @@ const Home = () => {
       >
         <div className="inner-element">
           {loading ? (
-            <loading></loading>
+            <div id="inin"></div>
           ) : (
             <div className="form">
               {error && error}

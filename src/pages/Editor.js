@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import ACTIONS from "../Actions";
-import axios from "axios";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const files = {
   "index.html": {
@@ -29,37 +29,23 @@ const files = {
 };
 
 const Editors = ({ socketRef, roomId, onCodeChange }) => {
-  const [fileName, setFileName] = useState("index.html"); // change to "index.html"
-  const [line, setLine] = useState(0); // change to "index.html"
-  const [word, setWord] = useState(0); // change to "index.html"
+  const [fileName] = useState("index.html");
   const editorRef = useRef(null);
+  const chatEndRef = useRef(null);
   const file = files[fileName];
   const [user, setUser] = useState(true);
   const [input, setInput] = useState("");
   const [isInput, setIsInput] = useState("");
-  const [response, setResponse] = useState("s");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [partialResponse, setPartialResponse] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
   const { speak, voices } = useSpeechSynthesis();
-  const { listen, listening, stop } = useSpeechRecognition({
+  const { listen } = useSpeechRecognition({
     onResult: (result) => {
       setInput(result);
     },
   });
-
-  function validate(code) {
-    if (code.includes("#")) {
-      const lines = code.split("\n");
-      let result = null;
-      for (let line of lines) {
-        if (line.startsWith("#")) {
-          result = line.substring(2).trim();
-          break;
-        }
-      }
-      code.replace("#" + result, "");
-    }
-    return code;
-  }
 
   function handleEditorDidMount(editor, monaco) {
     monaco.editor.defineTheme("myDraculaTheme", {
@@ -126,138 +112,153 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
     editorRef.current = editor;
     monaco.editor.setTheme("myDraculaTheme");
 
-    //onCodeChange(`<style>` + files["style.css"].value + `</style>` + files["index.html"].value + `<scr` + `ipt>` + files["script.js"].value + `</scr` + `ipt>`);
     onCodeChange(editorRef.current.getValue());
     listen();
   }
 
   function handleEditorChange(value, event) {
-    //onCodeChange(`<style>` + files["style.css"].value + `</style>` + files["index.html"].value + `<scr` + `ipt>` + files["script.js"].value + `</scr` + `ipt>`);
-    /*if (editorRef.current.getValue().includes("#")) {
-      editorRef.current.setValue(validate(editorRef.current.getValue()));
-    }*/
-    onCodeChange(editorRef.current.getValue());
+    if (editorRef.current) {
+        onCodeChange(editorRef.current.getValue());
 
-    if (user) {
-      socketRef.current.emit(ACTIONS.CODE_CHANGE, {
-        roomId,
-        code: value,
-        pos: editorRef.current.getPosition(),
-      });
-    }
-    if (!user) setUser(true);
-
-    const editor = editorRef.current;
-
-    if (editor) {
-      const model = editor.getModel();
-      setLine(model.getLineCount());
-      setWord(model.getLineMaxColumn(line));
-
-      const { endLineNumber } = event.changes[0].range;
-      const { endColumn } = event.changes[0].range;
-      /*
-      {
-       "changes": [
-        {
-         "range": {
-          "startLineNumber": 2,
-          "startColumn": 3,
-          "endLineNumber": 2,
-          "endColumn": 3
-         },
-         "rangeLength": 0,
-         "text": " ",
-         "rangeOffset": 4,
-         "forceMoveMarkers": false
+        if (user) {
+        socketRef.current.emit(ACTIONS.CODE_CHANGE, {
+            roomId,
+            code: value,
+            pos: editorRef.current.getPosition(),
+        });
         }
-       ],
-       "eol": "\n",
-       "versionId": 13,
-       "isUndoing": false,
-       "isRedoing": false,
-       "isFlush": false
-      }
-      */
-      //editorRef.current.setPosition({ lineNumber: endLineNumber, column: endColumn});
-
-      // editorRef.current.setPosition(editorRef.current.getPosition());
-
-      //alert(JSON.stringify(editorRef.current.getPosition(),undefined,1));
-      //onCodeChange(line+" "+ word + ' '+ endLineNumber + " "+endColumn);
+        if (!user) setUser(true);
     }
   }
+
   useEffect(() => {
     if (editorRef.current) {
-      //onCodeChange(`<style>` + files["style.css"].value + `</style>` + files["index.html"].value + `<scr` + `ipt>` + files["script.js"].value + `</scr` + `ipt>`);
       onCodeChange(editorRef.current.getValue());
     }
-  }, [file.value]);
+  }, [file.value, onCodeChange]);
 
   useEffect(() => {
     if (socketRef.current) {
       socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code, pos }) => {
-        if (code !== null) {
+        if (code !== null && editorRef.current) {
           editorRef.current.setValue(code);
-          editorRef.current.setPosition(pos);
+          if (pos) {
+            editorRef.current.setPosition(pos);
+          }
           setUser(false);
         }
       });
     }
 
     return () => {
-      socketRef.current.off(ACTIONS.CODE_CHANGE);
+      if (socketRef.current) {
+        socketRef.current.off(ACTIONS.CODE_CHANGE);
+      }
     };
   }, [socketRef.current]);
+
   useEffect(() => {
     if (input.includes("over")) {
       apiCall();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
+
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatHistory]);
 
   const handleInput = (event) => {
     setInput(event.target.value);
   };
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
   const apiCall = async () => {
     if (input && input !== isInput) {
       setIsInput(input);
-      setIsLoading(true);
-      const url = "https://api.openai.com/v1/chat/completions";
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_KEYOPENAI}`,
-      };
-      const data = {
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content:
-              input.replace("over", "") +
-              " in html. give code only. without backticks. without using code block. if code block having language then also only code",
-          },
-        ],
-        temperature: 0.7,
-      };
+      setIsGenerating(true);
+      setPartialResponse("");
 
-      try {
-        const response = await axios.post(url, data, { headers });
-        setResponse(response.data.choices[0].message.content);
-        editorRef.current.setValue(response.data.choices[0].message.content);
-      } catch (error) {
-        // alert(JSON.stringify(error));
-        console.error(error);
+      const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+      if (!apiKey) {
+        setChatHistory(prev => [...prev, 
+          { role: "user", content: input },
+          { role: "model", content: "⚠️ API Key not found. Please set REACT_APP_GEMINI_API_KEY in your .env file." }
+        ]);
+        setIsGenerating(false);
+        return;
       }
 
-      setIsLoading(false);
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" });
+
+      try {
+        const history = chatHistory.map(msg => ({
+          role: msg.role === "user" ? "user" : "model",
+          parts: [{ text: msg.content }],
+        }));
+
+        const chat = model.startChat({
+          history: history,
+          generationConfig: {
+            maxOutputTokens: 2000,
+          },
+        });
+
+        const prompt = input.replace("over", "") + " in html. give code only. without backticks. without using code block. if code block having language then also only code";
+        const result = await chat.sendMessageStream(prompt);
+        
+        let fullText = "";
+        for await (const chunk of result.stream) {
+          const chunkText = chunk.text();
+          fullText += chunkText;
+          setPartialResponse(fullText);
+        }
+
+        let cleanCode = fullText;
+        if (fullText.includes("```")) {
+          const match = fullText.match(/```(?:[a-zA-Z]+)?\n([\s\S]*?)\n```/);
+          if (match && match[1]) {
+            cleanCode = match[1];
+          } else {
+            cleanCode = fullText.replace(/```/g, "");
+          }
+        }
+
+        setChatHistory(prev => [
+          ...prev,
+          { role: "user", content: input },
+          { role: "model", content: fullText }
+        ]);
+
+        if (editorRef.current) {
+            editorRef.current.setValue(cleanCode.trim());
+        }
+      } catch (error) {
+        console.error("Gemini API Error:", error);
+        let errorMessage = error.message;
+        
+        // Handle Rate Limit (429) gracefully
+        if (errorMessage.includes("429") || errorMessage.toLowerCase().includes("quota exceeded")) {
+          const retryMatch = errorMessage.match(/retry in ([\d.]+)s/);
+          const retryTime = retryMatch ? `in ${Math.ceil(parseFloat(retryMatch[1]))} seconds` : "soon";
+          errorMessage = `⚠️ AI is currently busy (Rate limit reached). Please try again ${retryTime}.`;
+        } else {
+          errorMessage = `❌ Error: ${errorMessage.split('\n')[0]}`; // Only show first line
+        }
+
+        setChatHistory(prev => [
+          ...prev,
+          { role: "user", content: input },
+          { role: "model", content: errorMessage }
+        ]);
+      }
+
+      setIsGenerating(false);
+      setPartialResponse("");
       setInput("");
       setIsInput("");
-      document.querySelector("#apiForm").style = "display:none";
-      await delay(2000);
-      document.querySelector("#apiForm").style = "display:flex";
     }
   };
 
@@ -265,59 +266,72 @@ const Editors = ({ socketRef, roomId, onCodeChange }) => {
     event.preventDefault();
     apiCall();
   };
+
   return (
-    <editor>
-      <loading id="inin" style={{
-        display: isLoading ? 'flex' : 'none'
-      }}></loading>
-      <form id="apiForm" onSubmit={handleSubmit}>
-        {/*  <div>
-          <button style={{
-            margin: "0 1dvmin",
-            background: "gray",
-            padding: "0 1dvmin"
-          }} onClick={() => setFileName("index.html")}>
-            Editor
-          </button>
-           <button style={{
-            margin: "0 1dvmin",
-            background: "gray",
-            padding: "0 1dvmin"
-          }} onClick={() => setFileName("style.css")}>
-            Generated Code
-          </button> */}
-        {/* <button style={{
-            margin: "0 1dvmin",
-            background: "gray",
-            padding: "0 1dvmin"
-          }} onClick={() => setFileName("script.js")}>
-            JS
-          </button>
-        </div> */}
-        <input
-          type="text"
-          id="input"
-          placeholder="Command here"
-          value={input}
-          onChange={handleInput}
+    <editor className={isSidebarOpen ? "with-sidebar" : ""}>
+      <div className="main-editor-container">
+        <Editor
+          id="editor"
+          onMount={handleEditorDidMount}
+          path={file.name}
+          onChange={handleEditorChange}
+          defaultLanguage={file.language}
+          defaultValue={file.value}
+          roundedSelection={true}
+          scrollBeyondLastLine={false}
         />
-        <input type="button" className="vin"
-          onClick={() => {
-            speak({ text: editorRef.current.getValue(), voice: voices[12] });
-          }}
-          value="🔊">
-        </input>
-      </form>
-      <Editor
-        id="editor"
-        onMount={handleEditorDidMount}
-        path={file.name}
-        onChange={handleEditorChange}
-        defaultLanguage={file.language}
-        defaultValue={file.value}
-        roundedSelection={true}
-        scrollBeyondLastLine={false}
-      />
+        <button className="sidebar-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          {isSidebarOpen ? "→" : "←"} AI Chat
+        </button>
+      </div>
+
+      <div className={`ai-sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <h3>AI Assistant</h3>
+          <button className="close-sidebar" onClick={() => setIsSidebarOpen(false)}>×</button>
+        </div>
+        
+        <div className="sidebar-chat-content">
+          {(chatHistory.length > 0 || isGenerating) && (
+            <div className="chat-history">
+              {chatHistory.map((msg, index) => (
+                <div key={index} className={`chat-msg ${msg.role}`}>
+                  {msg.content}
+                </div>
+              ))}
+              {isGenerating && (
+                <div className="chat-msg model">
+                  {partialResponse || "Thinking..."}
+                </div>
+              )}
+              <div ref={chatEndRef} />
+            </div>
+          )}
+        </div>
+
+        <form className="sidebar-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input
+              type="text"
+              id="input"
+              placeholder="Ask anything..."
+              value={input}
+              onChange={handleInput}
+            />
+            <input type="button" className="voice-btn"
+              onClick={() => {
+                if (editorRef.current) {
+                    speak({ text: editorRef.current.getValue(), voice: voices[12] });
+                }
+              }}
+              value="🔊">
+            </input>
+          </div>
+          <button type="submit" className="send-btn" disabled={isGenerating}>
+            {isGenerating ? "..." : "Send"}
+          </button>
+        </form>
+      </div>
     </editor>
   );
 };
